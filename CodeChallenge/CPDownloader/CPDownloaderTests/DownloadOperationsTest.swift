@@ -19,6 +19,17 @@ class DownloadOperationsTest: XCTestCase {
         super.tearDown()
     }
     
+    func testThatItProperlyInitialize() {
+        
+        //  Given
+        //  When
+        let operations = DownloadOperations()
+        
+        //  Then
+        XCTAssertNotNil(operations.downloadsInProgress)
+        XCTAssertNotNil(operations.downloadQueue)
+    }
+    
     func testThatItDownloadsImageWithCorrectImageURL() {
         
         //  Given
@@ -75,5 +86,4 @@ class DownloadOperationsTest: XCTestCase {
             }
         }
     }
-    
 }

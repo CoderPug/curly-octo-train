@@ -16,6 +16,21 @@ enum State: String {
     }
 }
 
+//  DownloadOperations
+
+class DownloadOperations {
+    
+    var downloadsInProgress = [String: Operation]()
+    var downloadQueue: OperationQueue = {
+        
+        var queue = OperationQueue()
+        queue.name = "DownloadOperations.downloadQueue"
+        return queue
+    }()
+    
+}
+
+
 //  DownloadImageOperation
 
 class DownloadImageOperation: Operation {
