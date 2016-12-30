@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		C11428141E15DBB10029107E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11428131E15DBB10029107E /* AppDelegate.swift */; };
-		C11428161E15DBB10029107E /* InstagramImagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11428151E15DBB10029107E /* InstagramImagesTableViewController.swift */; };
 		C11428191E15DBB10029107E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C11428171E15DBB10029107E /* Main.storyboard */; };
 		C114281B1E15DBB10029107E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C114281A1E15DBB10029107E /* Assets.xcassets */; };
 		C114281E1E15DBB10029107E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C114281C1E15DBB10029107E /* LaunchScreen.storyboard */; };
 		C11428291E15DBB10029107E /* CodeChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11428281E15DBB10029107E /* CodeChallengeTests.swift */; };
 		C11428671E15EC6F0029107E /* CPDownloader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C114285D1E15DC2D0029107E /* CPDownloader.framework */; };
+		C114287B1E16BD590029107E /* InstagramImagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11428791E16BD590029107E /* InstagramImagesTableViewController.swift */; };
+		C11428801E16BDBA0029107E /* InstagramTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C114287E1E16BDBA0029107E /* InstagramTableViewCell.swift */; };
+		C11428811E16BDBA0029107E /* InstagramTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C114287F1E16BDBA0029107E /* InstagramTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +52,6 @@
 /* Begin PBXFileReference section */
 		C11428101E15DBB10029107E /* CodeChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodeChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C11428131E15DBB10029107E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C11428151E15DBB10029107E /* InstagramImagesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramImagesTableViewController.swift; sourceTree = "<group>"; };
 		C11428181E15DBB10029107E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C114281A1E15DBB10029107E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C114281D1E15DBB10029107E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -59,6 +60,9 @@
 		C11428281E15DBB10029107E /* CodeChallengeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeChallengeTests.swift; sourceTree = "<group>"; };
 		C114282A1E15DBB10029107E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C11428571E15DC2D0029107E /* CPDownloader.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CPDownloader.xcodeproj; path = CPDownloader/CPDownloader.xcodeproj; sourceTree = "<group>"; };
+		C11428791E16BD590029107E /* InstagramImagesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramImagesTableViewController.swift; sourceTree = "<group>"; };
+		C114287E1E16BDBA0029107E /* InstagramTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramTableViewCell.swift; sourceTree = "<group>"; };
+		C114287F1E16BDBA0029107E /* InstagramTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstagramTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,8 +107,8 @@
 			isa = PBXGroup;
 			children = (
 				C11428131E15DBB10029107E /* AppDelegate.swift */,
-				C11428151E15DBB10029107E /* InstagramImagesTableViewController.swift */,
 				C11428171E15DBB10029107E /* Main.storyboard */,
+				C11428781E16BD590029107E /* InstagramImages */,
 				C114281A1E15DBB10029107E /* Assets.xcassets */,
 				C114281C1E15DBB10029107E /* LaunchScreen.storyboard */,
 				C114281F1E15DBB10029107E /* Info.plist */,
@@ -128,6 +132,24 @@
 				C114285F1E15DC2D0029107E /* CPDownloaderTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		C11428781E16BD590029107E /* InstagramImages */ = {
+			isa = PBXGroup;
+			children = (
+				C11428791E16BD590029107E /* InstagramImagesTableViewController.swift */,
+				C114287A1E16BD590029107E /* Views */,
+			);
+			path = InstagramImages;
+			sourceTree = "<group>";
+		};
+		C114287A1E16BD590029107E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C114287E1E16BDBA0029107E /* InstagramTableViewCell.swift */,
+				C114287F1E16BDBA0029107E /* InstagramTableViewCell.xib */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,6 +260,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C11428811E16BDBA0029107E /* InstagramTableViewCell.xib in Resources */,
 				C114281E1E15DBB10029107E /* LaunchScreen.storyboard in Resources */,
 				C114281B1E15DBB10029107E /* Assets.xcassets in Resources */,
 				C11428191E15DBB10029107E /* Main.storyboard in Resources */,
@@ -258,8 +281,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C11428161E15DBB10029107E /* InstagramImagesTableViewController.swift in Sources */,
+				C114287B1E16BD590029107E /* InstagramImagesTableViewController.swift in Sources */,
 				C11428141E15DBB10029107E /* AppDelegate.swift in Sources */,
+				C11428801E16BDBA0029107E /* InstagramTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
