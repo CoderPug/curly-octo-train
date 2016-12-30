@@ -47,29 +47,43 @@ public class CPDownloader {
             return
         }
         
-        operation.completionBlock = { [weak self] in
+        if var arrayHandlers = self.downloadOperations.downloadsInProgressHandlers[url] {
             
-            if operation.isCancelled {
+            arrayHandlers.append(handler)
+            self.downloadOperations.downloadsInProgressHandlers[url] = arrayHandlers
+        } else {
+            
+            self.downloadOperations.downloadsInProgressHandlers[url] = [handler]
+            
+            operation.completionBlock = { [weak self] in
                 
-                handler(.Failure(CPDownloaderError.operationCanceled))
-                return
+                if operation.isCancelled {
+                    
+                    handler(.Failure(CPDownloaderError.operationCanceled))
+                    return
+                }
+                
+                _ = self?.downloadOperations.downloadsInProgress.removeValue(forKey: url)
+                
+                guard let arrayHandlers = self?.downloadOperations.downloadsInProgressHandlers[url],
+                    let image = operation.image else {
+                    
+                    handler(.Failure(CPDownloaderError.couldNotObtainImage))
+                    return
+                }
+                
+                self?.cache.setObject(image, forKey: url as NSString)
+                
+                for handler in arrayHandlers {
+                    
+                    handler(.Success(image))
+                }
             }
             
-            _ = self?.downloadOperations.downloadsInProgress.removeValue(forKey: url)
-            
-            guard let image = operation.image else {
-                
-                handler(.Failure(CPDownloaderError.couldNotObtainImage))
-                return
-            }
-            
-            self?.cache.setObject(image, forKey: url as NSString)
-            
-            handler(.Success(image))
+            downloadOperations.downloadsInProgress[url] = operation
+            downloadOperations.downloadQueue.addOperation(operation)
         }
         
-        downloadOperations.downloadsInProgress[url] = operation
-        downloadOperations.downloadQueue.addOperation(operation)
     }
 }
 
