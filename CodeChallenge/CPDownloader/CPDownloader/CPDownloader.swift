@@ -28,7 +28,7 @@ public class CPDownloader {
     
     fileprivate let downloadOperations = DownloadOperations()
     
-    fileprivate let cache = NSCache<NSString, UIImage>()
+    fileprivate let downloadCache = DownloadCache()
     
     /// Function for getting Image from URL
     ///
@@ -40,10 +40,12 @@ public class CPDownloader {
         let operation = DownloadImageOperation()
         operation.url = url
         
-        if let cachedImage = cache.object(forKey: url as NSString) {
+        if let cachedObject = DownloadCache.sharedInstance.getObject(key: url) {
             
-            print("showing cached image")
-            handler(.Success(cachedImage))
+            if let cachedImage = cachedObject as? UIImage {
+                print("showing cached image")
+                handler(.Success(cachedImage))
+            }
             return
         }
         
@@ -72,7 +74,7 @@ public class CPDownloader {
                     return
                 }
                 
-                self?.cache.setObject(image, forKey: url as NSString)
+                self?.downloadCache.setObject(object: image, key: url)
                 
                 for handler in arrayHandlers {
                     
