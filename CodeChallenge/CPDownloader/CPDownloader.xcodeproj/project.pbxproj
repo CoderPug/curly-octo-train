@@ -13,6 +13,7 @@
 		C11428611E15DDAE0029107E /* CPDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11428601E15DDAE0029107E /* CPDownloader.swift */; };
 		C11428641E15DE590029107E /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11428631E15DE590029107E /* DownloadManager.swift */; };
 		C11428691E15FDDD0029107E /* DownloadOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11428681E15FDDD0029107E /* DownloadOperations.swift */; };
+		C114286B1E1602820029107E /* DownloadOperationsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C114286A1E1602820029107E /* DownloadOperationsTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,7 @@
 		C11428601E15DDAE0029107E /* CPDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPDownloader.swift; sourceTree = "<group>"; };
 		C11428631E15DE590029107E /* DownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
 		C11428681E15FDDD0029107E /* DownloadOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadOperations.swift; sourceTree = "<group>"; };
+		C114286A1E1602820029107E /* DownloadOperationsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadOperationsTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				C114284B1E15DC190029107E /* DownloadManagerTest.swift */,
+				C114286A1E1602820029107E /* DownloadOperationsTest.swift */,
 				C114284D1E15DC190029107E /* Info.plist */,
 			);
 			path = CPDownloaderTests;
@@ -226,6 +229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C114284C1E15DC190029107E /* DownloadManagerTest.swift in Sources */,
+				C114286B1E1602820029107E /* DownloadOperationsTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

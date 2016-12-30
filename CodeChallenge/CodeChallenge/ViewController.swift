@@ -7,12 +7,19 @@
 //
 
 import UIKit
+import CPDownloader
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        let _ = DownloadDataManager.downloadImage(url: "https://ifsstech.files.wordpress.com/2008/10/169.jpg") { result in
+            
+            dump(result)
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
