@@ -13,6 +13,7 @@
 		C114281B1E15DBB10029107E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C114281A1E15DBB10029107E /* Assets.xcassets */; };
 		C114281E1E15DBB10029107E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C114281C1E15DBB10029107E /* LaunchScreen.storyboard */; };
 		C11428291E15DBB10029107E /* CodeChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11428281E15DBB10029107E /* CodeChallengeTests.swift */; };
+		C11428671E15EC6F0029107E /* CPDownloader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C114285D1E15DC2D0029107E /* CPDownloader.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,13 @@
 			remoteGlobalIDString = C11428461E15DC190029107E;
 			remoteInfo = CPDownloaderTests;
 		};
+		C11428651E15EC670029107E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C11428571E15DC2D0029107E /* CPDownloader.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C114283C1E15DC190029107E;
+			remoteInfo = CPDownloader;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C11428671E15EC6F0029107E /* CPDownloader.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,6 +144,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				C11428661E15EC670029107E /* PBXTargetDependency */,
 			);
 			name = CodeChallenge;
 			productName = CodeChallenge;
@@ -268,6 +278,11 @@
 			isa = PBXTargetDependency;
 			target = C114280F1E15DBB10029107E /* CodeChallenge */;
 			targetProxy = C11428251E15DBB10029107E /* PBXContainerItemProxy */;
+		};
+		C11428661E15EC670029107E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CPDownloader;
+			targetProxy = C11428651E15EC670029107E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
