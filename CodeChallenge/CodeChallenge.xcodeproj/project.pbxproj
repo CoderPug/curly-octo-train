@@ -16,6 +16,7 @@
 		C114287B1E16BD590029107E /* InstagramImagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11428791E16BD590029107E /* InstagramImagesTableViewController.swift */; };
 		C11428801E16BDBA0029107E /* InstagramTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C114287E1E16BDBA0029107E /* InstagramTableViewCell.swift */; };
 		C11428811E16BDBA0029107E /* InstagramTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C114287F1E16BDBA0029107E /* InstagramTableViewCell.xib */; };
+		C11428831E16C45C0029107E /* CPDownloader.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C114285D1E15DC2D0029107E /* CPDownloader.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,7 +48,28 @@
 			remoteGlobalIDString = C114283C1E15DC190029107E;
 			remoteInfo = CPDownloader;
 		};
+		C11428841E16C45C0029107E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C11428571E15DC2D0029107E /* CPDownloader.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C114283C1E15DC190029107E;
+			remoteInfo = CPDownloader;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C11428861E16C45C0029107E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C11428831E16C45C0029107E /* CPDownloader.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		C11428101E15DBB10029107E /* CodeChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodeChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -162,11 +184,13 @@
 				C114280C1E15DBB10029107E /* Sources */,
 				C114280D1E15DBB10029107E /* Frameworks */,
 				C114280E1E15DBB10029107E /* Resources */,
+				C11428861E16C45C0029107E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				C11428661E15EC670029107E /* PBXTargetDependency */,
+				C11428851E16C45C0029107E /* PBXTargetDependency */,
 			);
 			name = CodeChallenge;
 			productName = CodeChallenge;
@@ -308,6 +332,11 @@
 			name = CPDownloader;
 			targetProxy = C11428651E15EC670029107E /* PBXContainerItemProxy */;
 		};
+		C11428851E16C45C0029107E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CPDownloader;
+			targetProxy = C11428841E16C45C0029107E /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -426,6 +455,7 @@
 		C114282E1E15DBB10029107E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 7QN6NJ95ZV;
 				INFOPLIST_FILE = CodeChallenge/Info.plist;
@@ -442,6 +472,7 @@
 		C114282F1E15DBB10029107E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 7QN6NJ95ZV;
 				INFOPLIST_FILE = CodeChallenge/Info.plist;
