@@ -1,5 +1,5 @@
 //
-//  InstagramImagesViewController.swift
+//  InstagramImagesTableViewController.swift
 //  CodeChallenge
 //
 //  Created by Jose Torres on 12/29/16.
@@ -9,16 +9,17 @@
 import UIKit
 import CPDownloader
 
-class InstagramImagesViewController: UIViewController {
+class InstagramImagesTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
 }
 
+extension InstagramImagesTableViewController {
+    
+}
