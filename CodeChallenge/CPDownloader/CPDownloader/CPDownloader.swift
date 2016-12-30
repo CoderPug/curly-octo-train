@@ -80,6 +80,8 @@ public class CPDownloader {
                     
                     handler(.Success(image))
                 }
+                
+                self?.downloadOperations.downloadsInProgressHandlers[url] = nil
             }
             
             downloadOperations.downloadsInProgress[url] = operation
