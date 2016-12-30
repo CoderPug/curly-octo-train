@@ -16,6 +16,8 @@
 		C114286B1E1602820029107E /* DownloadOperationsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C114286A1E1602820029107E /* DownloadOperationsTest.swift */; };
 		C114286D1E160F2A0029107E /* CPDownloaderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C114286C1E160F2A0029107E /* CPDownloaderTest.swift */; };
 		C114286F1E1617010029107E /* UIImageView+CPDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C114286E1E1617010029107E /* UIImageView+CPDownloader.swift */; };
+		C11428711E162B2B0029107E /* UIImageView+CPDownloaderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11428701E162B2B0029107E /* UIImageView+CPDownloaderTest.swift */; };
+		C11428731E1633F10029107E /* DownloadCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11428721E1633F10029107E /* DownloadCache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +43,8 @@
 		C114286A1E1602820029107E /* DownloadOperationsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadOperationsTest.swift; sourceTree = "<group>"; };
 		C114286C1E160F2A0029107E /* CPDownloaderTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPDownloaderTest.swift; sourceTree = "<group>"; };
 		C114286E1E1617010029107E /* UIImageView+CPDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+CPDownloader.swift"; sourceTree = "<group>"; };
+		C11428701E162B2B0029107E /* UIImageView+CPDownloaderTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+CPDownloaderTest.swift"; sourceTree = "<group>"; };
+		C11428721E1633F10029107E /* DownloadCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadCache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				C114286C1E160F2A0029107E /* CPDownloaderTest.swift */,
+				C11428701E162B2B0029107E /* UIImageView+CPDownloaderTest.swift */,
 				C114284B1E15DC190029107E /* DownloadManagerTest.swift */,
 				C114286A1E1602820029107E /* DownloadOperationsTest.swift */,
 				C114284D1E15DC190029107E /* Info.plist */,
@@ -108,6 +113,7 @@
 			children = (
 				C11428631E15DE590029107E /* DownloadManager.swift */,
 				C11428681E15FDDD0029107E /* DownloadOperations.swift */,
+				C11428721E1633F10029107E /* DownloadCache.swift */,
 			);
 			path = DownloadManager;
 			sourceTree = "<group>";
@@ -228,6 +234,7 @@
 				C11428691E15FDDD0029107E /* DownloadOperations.swift in Sources */,
 				C114286F1E1617010029107E /* UIImageView+CPDownloader.swift in Sources */,
 				C11428641E15DE590029107E /* DownloadManager.swift in Sources */,
+				C11428731E1633F10029107E /* DownloadCache.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +244,7 @@
 			files = (
 				C114284C1E15DC190029107E /* DownloadManagerTest.swift in Sources */,
 				C114286B1E1602820029107E /* DownloadOperationsTest.swift in Sources */,
+				C11428711E162B2B0029107E /* UIImageView+CPDownloaderTest.swift in Sources */,
 				C114286D1E160F2A0029107E /* CPDownloaderTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

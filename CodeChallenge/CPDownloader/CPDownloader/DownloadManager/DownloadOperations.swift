@@ -20,6 +20,7 @@ enum State: String {
 
 class DownloadOperations {
     
+    var downloadsInProgressHandlers = [String: Array<(Result<UIImage>)->()>]()
     var downloadsInProgress = [String: Operation]()
     var downloadQueue: OperationQueue = {
         

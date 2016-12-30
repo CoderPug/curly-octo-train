@@ -28,6 +28,8 @@ public class CPDownloader {
     
     fileprivate let downloadOperations = DownloadOperations()
     
+    fileprivate let downloadCache = DownloadCache()
+    
     /// Function for getting Image from URL
     ///
     /// - Parameters:
@@ -38,27 +40,52 @@ public class CPDownloader {
         let operation = DownloadImageOperation()
         operation.url = url
         
-        operation.completionBlock = { [weak self] in
+        if let cachedObject = DownloadCache.sharedInstance.getObject(key: url) {
             
-            if operation.isCancelled {
-                
-                handler(.Failure(CPDownloaderError.operationCanceled))
-                return
+            if let cachedImage = cachedObject as? UIImage {
+                print("showing cached image")
+                handler(.Success(cachedImage))
             }
-            
-            _ = self?.downloadOperations.downloadsInProgress.removeValue(forKey: url)
-            
-            guard let image = operation.image else {
-                
-                handler(.Failure(CPDownloaderError.couldNotObtainImage))
-                return
-            }
-            
-            handler(.Success(image))
+            return
         }
         
-        downloadOperations.downloadsInProgress[url] = operation
-        downloadOperations.downloadQueue.addOperation(operation)
+        if var arrayHandlers = self.downloadOperations.downloadsInProgressHandlers[url] {
+            
+            arrayHandlers.append(handler)
+            self.downloadOperations.downloadsInProgressHandlers[url] = arrayHandlers
+        } else {
+            
+            self.downloadOperations.downloadsInProgressHandlers[url] = [handler]
+            
+            operation.completionBlock = { [weak self] in
+                
+                if operation.isCancelled {
+                    
+                    handler(.Failure(CPDownloaderError.operationCanceled))
+                    return
+                }
+                
+                _ = self?.downloadOperations.downloadsInProgress.removeValue(forKey: url)
+                
+                guard let arrayHandlers = self?.downloadOperations.downloadsInProgressHandlers[url],
+                    let image = operation.image else {
+                    
+                    handler(.Failure(CPDownloaderError.couldNotObtainImage))
+                    return
+                }
+                
+                self?.downloadCache.setObject(object: image, key: url)
+                
+                for handler in arrayHandlers {
+                    
+                    handler(.Success(image))
+                }
+            }
+            
+            downloadOperations.downloadsInProgress[url] = operation
+            downloadOperations.downloadQueue.addOperation(operation)
+        }
+        
     }
 }
 
