@@ -1,6 +1,6 @@
 //
 //  DownloadManagerTest.swift
-//  DownloadManagerTest
+//  CPDownloader
 //
 //  Created by Jose Torres on 12/29/16.
 //  Copyright © 2016 coderpug. All rights reserved.

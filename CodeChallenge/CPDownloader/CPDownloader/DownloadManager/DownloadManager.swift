@@ -42,6 +42,8 @@ enum DownloadManagerError: Error {
     case couldNotObtainImage
 }
 
+//  MARK: DownloadDataManager
+
 public struct DownloadDataManager {
     
     fileprivate typealias downloadDataManagerResponseType = (data: Data?, type: SupportedTypes)
