@@ -42,7 +42,9 @@ enum DownloadManagerError: Error {
     case couldNotObtainImage
 }
 
-public struct DownloadDataManager {
+//  MARK: DownloadDataManager
+
+internal struct DownloadDataManager {
     
     fileprivate typealias downloadDataManagerResponseType = (data: Data?, type: SupportedTypes)
     fileprivate typealias downloadDataManagerHandler = (Result<downloadDataManagerResponseType>) -> Swift.Void
@@ -121,9 +123,9 @@ public struct DownloadDataManager {
 
 extension DownloadDataManager {
 
-    public typealias downloadDataManagerImageHandler = (Result<UIImage>) -> Swift.Void
+    internal typealias downloadDataManagerImageHandler = (Result<UIImage>) -> Swift.Void
     
-    public static func downloadImage(url: String, handler: @escaping downloadDataManagerImageHandler) {
+    internal static func downloadImage(url: String, handler: @escaping downloadDataManagerImageHandler) {
     
         download(url: url) { result in
         

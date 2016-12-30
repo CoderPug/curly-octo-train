@@ -1,5 +1,5 @@
 //
-//  DownloadManagerTest.swift
+//  CPDownloaderTest.swift
 //  CPDownloader
 //
 //  Created by Jose Torres on 12/29/16.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import CPDownloader
 
-class DownloadManagerTest: XCTestCase {
+class CPDownloaderTest: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -24,16 +24,17 @@ class DownloadManagerTest: XCTestCase {
         //  Given
         let url = "https://ifsstech.files.wordpress.com/2008/10/169.jpg"
         
-        let completionExpectation = expectation(description: "DownloadDataManager performs async download task to get image")
+        let completionExpectation = expectation(description: "CPDownloader performs async download task to get image")
         
         //  When
-        DownloadDataManager.downloadImage(url: url) { result in
+        CPDownloader.sharedInstance.getImage(url: url) { result in
             
             switch result {
                 
-            case let .Success(data):
+            case let .Success(image):
                 //  Then
-                XCTAssertNotNil(data)
+                XCTAssertNotNil(image)
+                XCTAssert(image.isKind(of: UIImage.self))
                 break
                 
             default:
@@ -52,54 +53,22 @@ class DownloadManagerTest: XCTestCase {
         }
     }
     
-    func testThatItDownloadsImageWithCorrectAnyURL() {
-        
-        //  Given
-        let url = "https://www.dropbox.com/s/eqtddw19ndjgmyn/Archive.zip?dl=0"
-        
-        let completionExpectation = expectation(description: "DownloadDataManager performs async download task to get image")
-        
-        //  When
-        DownloadDataManager.downloadImage(url: url) { result in
-            
-            switch result {
-                
-            case let .Failure(error):
-                //  Then
-                XCTAssertNotNil(error)
-                break
-                
-            default:
-                XCTFail("testThatItDownloadsImageWithCorrectAnyURL-error")
-                break
-            }
-            
-            completionExpectation.fulfill()
-        }
-        
-        waitForExpectations(timeout: 5.0) { error in
-            
-            if let error = error {
-                XCTFail("testThatItDownloadsImageWithCorrectAnyURL error: \(error)")
-            }
-        }
-    }
-    
     func testThatItGetsErrorWithIncorrectImageURL() {
         
         //  Given
         let url = "https://ifsstech.files.wordpress.com/2008/10/x.jpg"
         
-        let completionExpectation = expectation(description: "DownloadDataManager performs async download task to get image")
+        let completionExpectation = expectation(description: "CPDownloader performs async download task to get image")
         
         //  When
-        DownloadDataManager.downloadImage(url: url) { result in
+        CPDownloader.sharedInstance.getImage(url: url) { result in
             
             switch result {
                 
             case let .Failure(error):
                 //  Then
                 XCTAssertNotNil(error)
+                XCTAssert(error as? CPDownloaderError == CPDownloaderError.couldNotObtainImage)
                 break
                 
             default:
@@ -123,16 +92,17 @@ class DownloadManagerTest: XCTestCase {
         //  Given
         let url = "https://ifsstech"
         
-        let completionExpectation = expectation(description: "DownloadDataManager performs async download task to get image")
+        let completionExpectation = expectation(description: "CPDownloader performs async download task to get image")
         
         //  When
-        DownloadDataManager.downloadImage(url: url) { result in
+        CPDownloader.sharedInstance.getImage(url: url) { result in
             
             switch result {
                 
             case let .Failure(error):
                 //  Then
                 XCTAssertNotNil(error)
+                XCTAssert(error as? CPDownloaderError == CPDownloaderError.couldNotObtainImage)
                 break
                 
             default:
@@ -150,5 +120,5 @@ class DownloadManagerTest: XCTestCase {
             }
         }
     }
-
+    
 }
