@@ -32,7 +32,6 @@ class DownloadManagerTest: XCTestCase {
             switch result {
                 
             case let .Success(data):
-                
                 //  Then
                 XCTAssertNotNil(data)
                 break

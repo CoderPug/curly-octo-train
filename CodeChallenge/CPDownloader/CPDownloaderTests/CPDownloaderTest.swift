@@ -32,7 +32,6 @@ class CPDownloaderTest: XCTestCase {
             switch result {
                 
             case let .Success(image):
-                
                 //  Then
                 XCTAssertNotNil(image)
                 XCTAssert(image.isKind(of: UIImage.self))
