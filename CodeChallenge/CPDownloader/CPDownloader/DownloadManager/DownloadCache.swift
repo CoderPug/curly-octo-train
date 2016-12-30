@@ -39,6 +39,10 @@ class DownloadCache {
     
     //  MARK: -
     
+    /// Function for getting estimated memory cost of AnyObject. Currently supports Image.
+    ///
+    /// - Parameter object: Object to measure.
+    /// - Returns: Int value of object cost in memory.
     fileprivate func costForObject(object: AnyObject) -> Int {
         
         guard object is UIImage,
