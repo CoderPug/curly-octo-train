@@ -478,6 +478,7 @@
 				C114282F1E15DBB10029107E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C11428301E15DBB10029107E /* Build configuration list for PBXNativeTarget "CodeChallengeTests" */ = {
 			isa = XCConfigurationList;
@@ -486,6 +487,7 @@
 				C11428321E15DBB10029107E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
