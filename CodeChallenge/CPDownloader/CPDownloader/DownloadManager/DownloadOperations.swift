@@ -30,7 +30,6 @@ class DownloadOperations {
     
 }
 
-
 //  DownloadImageOperation
 
 class DownloadImageOperation: Operation {

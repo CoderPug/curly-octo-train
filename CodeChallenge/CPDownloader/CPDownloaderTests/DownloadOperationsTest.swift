@@ -30,6 +30,14 @@ class DownloadOperationsTest: XCTestCase {
         XCTAssertNotNil(operations.downloadQueue)
     }
     
+    func testThatItDownloadImageOperationIsAsynchronous() {
+        
+        //  Given
+        //  When
+        let operation = DownloadImageOperation()
+        XCTAssertTrue(operation.isAsynchronous)
+    }
+
     func testThatItDownloadsImageWithCorrectImageURL() {
         
         //  Given
