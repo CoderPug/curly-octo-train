@@ -16,11 +16,19 @@ class InstagramImagesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureView()
         requestInstagramAPI()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func configureView() {
+        
+        tableView.register(UINib.init(nibName: InstagramTableViewCellConstants.nibName,
+                                      bundle: Bundle.main),
+                           forCellReuseIdentifier: InstagramTableViewCellConstants.cellIdentifier)
     }
     
     /// Adding test function for InstagramAPI
@@ -37,9 +45,12 @@ class InstagramImagesTableViewController: UITableViewController {
                 return
             }
             
-            self?.arrayElements = list
-
-            self?.tableView.reloadData()
+            DispatchQueue.main.async(execute: { () -> Void in
+                
+                self?.arrayElements = list
+                
+                self?.tableView.reloadData()
+            })
         }
 
         task.resume()
@@ -55,11 +66,14 @@ extension InstagramImagesTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let item = arrayElements[indexPath.row] as? NSDictionary
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: InstagramTableViewCellConstants.cellIdentifier) as? InstagramTableViewCell,
+            let item = arrayElements[indexPath.row] as? NSDictionary,
+            let url = item.value(forKeyPath: "images.standard_resolution.url") as? String else {
+            
+            return UITableViewCell()
+        }
         
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-        
-        cell.textLabel?.text = item?.value(forKeyPath: "images.standard_resolution.url") as? String
+        cell.load(url: url)
         
         return cell
     }
