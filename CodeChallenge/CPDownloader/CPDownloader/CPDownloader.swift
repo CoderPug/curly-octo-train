@@ -24,6 +24,8 @@ public class CPDownloader {
     
     public typealias getImageHandler = (Result<UIImage>) -> Swift.Void
     
+    public typealias getJSONHandler = (Result<[String: AnyObject]>) -> Swift.Void
+    
     public static let sharedInstance = CPDownloader()
     
     fileprivate let downloadOperations = DownloadOperations()
@@ -99,6 +101,26 @@ public class CPDownloader {
             _ = downloadOperations.downloadsInProgress.removeValue(forKey: url)
         }
         
+    }
+    
+    //  MARK: +JSON
+    
+    public func getJSON(url: String, handler: @escaping getJSONHandler) {
+
+        DownloadDataManager.downloadJSON(url: url) { result in
+            
+            switch result {
+                
+            case .Failure(_):
+                
+                break
+                
+            case let .Success(json):
+                
+                handler(.Success(json))
+                break
+            }
+        }
     }
 }
 

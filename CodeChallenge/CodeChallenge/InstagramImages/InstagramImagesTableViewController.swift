@@ -62,37 +62,41 @@ class InstagramImagesTableViewController: UITableViewController {
     func requestInstagramAPI(url: String) {
         
         requestInProcess = true
-        
-        let url = URL(string: url)!
-        
-        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+
+        CPDownloader.sharedInstance.getJSON(url: url) { [weak self] result in
             
             self?.requestInProcess = false
             
-            guard let data = data,
-                let dictionary = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject],
-                let list = dictionary?["data"] as? [AnyObject] else {
-                    
-                return
-            }
-            
-            self?.lastResponse = dictionary
-            
-            DispatchQueue.main.async(execute: { () -> Void in
+            switch result {
                 
-                if let elements = self?.arrayElements {
+            case let .Failure(error):
+                dump(error)
+                break
+                
+            case let .Success(dictionary):
+                
+                guard let list = dictionary["data"] as? [AnyObject] else {
                     
-                    self?.arrayElements = elements + list
-                } else {
-                    
-                    self?.arrayElements = list
+                    return
                 }
                 
-                self?.tableView.reloadData()
-            })
+                self?.lastResponse = dictionary
+                
+                DispatchQueue.main.async(execute: { () -> Void in
+                    
+                    if let elements = self?.arrayElements {
+                        
+                        self?.arrayElements = elements + list
+                    } else {
+                        
+                        self?.arrayElements = list
+                    }
+                    
+                    self?.tableView.reloadData()
+                })
+                break
+            }
         }
-
-        task.resume()
     }
 }
 
