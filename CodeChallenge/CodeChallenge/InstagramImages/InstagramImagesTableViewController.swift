@@ -78,4 +78,16 @@ extension InstagramImagesTableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard let cell = tableView.cellForRow(at: indexPath) as? InstagramTableViewCell,
+            let item = arrayElements[indexPath.row] as? NSDictionary,
+            let url = item.value(forKeyPath: "images.standard_resolution.url") as? String else {
+            
+            return
+        }
+        
+        cell.cancel(url: url)
+    }
+    
 }
