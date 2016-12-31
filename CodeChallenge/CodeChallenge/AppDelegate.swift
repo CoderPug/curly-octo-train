@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  CodeChallenge
 //
-//  Created by Santex on 12/29/16.
+//  Created by Jose Torres on 12/29/16.
 //  Copyright © 2016 coderpug. All rights reserved.
 //
 
@@ -13,9 +13,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        window?.tintColor = Appearance.Colors.first
+        
+        globalAppearance()
+        
         return true
     }
 

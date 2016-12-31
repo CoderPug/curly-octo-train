@@ -32,6 +32,8 @@ class InstagramImagesTableViewController: UITableViewController {
     
     func configureView() {
         
+        tableView.backgroundColor = Appearance.Colors.empty
+        
         tableView.register(UINib.init(nibName: InstagramTableViewCellConstants.nibName,
                                       bundle: Bundle.main),
                            forCellReuseIdentifier: InstagramTableViewCellConstants.cellIdentifier)
