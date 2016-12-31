@@ -49,10 +49,10 @@
             </objects>
             <point key="canvasLocation" x="1396" y="-33"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Instagram Images Detail Table View Controller-->
         <scene sceneID="g5x-1y-s5d">
             <objects>
-                <tableViewController id="IlI-Tx-x9s" sceneMemberID="viewController">
+                <tableViewController id="IlI-Tx-x9s" customClass="InstagramImagesDetailTableViewController" customModule="CodeChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="3Z7-u7-1Vh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

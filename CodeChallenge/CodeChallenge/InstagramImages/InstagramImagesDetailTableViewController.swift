@@ -35,7 +35,7 @@ class InstagramImagesDetailTableViewController: UITableViewController {
     }
 }
 
-extension InstagramImagesDetailViewController {
+extension InstagramImagesDetailTableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
