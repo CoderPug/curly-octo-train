@@ -12,12 +12,18 @@ import CPDownloader
 class InstagramImagesTableViewController: UITableViewController {
 
     var arrayElements = [AnyObject]()
+    var requestInProcess: Bool = false
+    var lastResponse: [String: AnyObject]?
+    let numberOfElementsBeforeReloading = 8
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureView()
-        requestInstagramAPI()
+        
+        let accessToken = "2253601763.1677ed0.d35015431cb744cd8e643bbdc3131c6d"
+        let url = "https://api.instagram.com/v1/users/self/media/recent/?access_token=\(accessToken)"
+        requestInstagramAPI(url: url)
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,22 +38,34 @@ class InstagramImagesTableViewController: UITableViewController {
     }
     
     /// Adding test function for InstagramAPI
-    func requestInstagramAPI() {
+    func requestInstagramAPI(url: String) {
         
-        let accessToken = "2253601763.1677ed0.d35015431cb744cd8e643bbdc3131c6d"
-        let url = URL(string:"https://api.instagram.com/v1/users/self/media/recent/?access_token=\(accessToken)")!
+        requestInProcess = true
+        
+        let url = URL(string: url)!
         
         let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-        
+            
+            self?.requestInProcess = false
+            
             guard let data = data,
                 let dictionary = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject],
                 let list = dictionary?["data"] as? [AnyObject] else {
+                    
                 return
             }
             
+            self?.lastResponse = dictionary
+            
             DispatchQueue.main.async(execute: { () -> Void in
                 
-                self?.arrayElements = list
+                if let elements = self?.arrayElements {
+                    
+                    self?.arrayElements = elements + list
+                } else {
+                    
+                    self?.arrayElements = list
+                }
                 
                 self?.tableView.reloadData()
             })
@@ -75,7 +93,30 @@ extension InstagramImagesTableViewController {
         
         cell.load(url: url)
         
+        if requestInProcess == false && indexPath.row >= (arrayElements.count - numberOfElementsBeforeReloading) {
+         
+            guard let pagination = lastResponse?["pagination"] as? NSDictionary,
+                let nextUrl = pagination["next_url"] as? String else {
+
+                return cell
+            }
+            
+            requestInstagramAPI(url: nextUrl)
+        }
+        
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard let cell = tableView.cellForRow(at: indexPath) as? InstagramTableViewCell,
+            let item = arrayElements[indexPath.row] as? NSDictionary,
+            let url = item.value(forKeyPath: "images.standard_resolution.url") as? String else {
+            
+            return
+        }
+        
+        cell.cancel(url: url)
     }
     
 }

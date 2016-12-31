@@ -37,4 +37,9 @@ class InstagramTableViewCell: UITableViewCell {
         
         imageMedia.getImage(url: url)
     }
+    
+    func cancel(url: String) {
+        
+        imageMedia.cancel(url: url)
+    }
 }
