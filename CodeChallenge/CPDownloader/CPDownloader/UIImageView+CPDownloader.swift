@@ -32,4 +32,8 @@ extension UIImageView {
         }
     }
     
+    public func cancel(url:String) {
+    
+        CPDownloader.sharedInstance.cancel(url: url)
+    }
 }
