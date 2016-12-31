@@ -12,6 +12,7 @@ struct InstagramDetailTableViewCellConstants {
     
     static let nibName = "InstagramDetailTableViewCell"
     static let cellIdentifier = "InstagramDetailTableViewCell"
+    static let estimatedHeight: CGFloat = 70
 }
 
 class InstagramDetailTableViewCell: UITableViewCell {
@@ -64,6 +65,13 @@ class InstagramDetailTableViewCell: UITableViewCell {
         labelAuthor.text = author
         labelDate.text = date
         labelDescription.text = description
+    }
+    
+    func load(title: String, detail: String) {
+        
+        labelAuthor.text = title
+        labelDate.text = ""
+        labelDescription.text = detail
     }
 
 }
