@@ -19,6 +19,8 @@ class DownloadManagerTest: XCTestCase {
         super.tearDown()
     }
     
+    //  MARK: Image support
+    
     func testThatItDownloadsImageWithCorrectImageURL() {
         
         //  Given
@@ -118,7 +120,7 @@ class DownloadManagerTest: XCTestCase {
         }
     }
     
-    func testThatItGetsErrorWithIncorrectURL() {
+    func testThatItGetsImageErrorWithIncorrectURL() {
         
         //  Given
         let url = "https://ifsstech"
@@ -136,7 +138,7 @@ class DownloadManagerTest: XCTestCase {
                 break
                 
             default:
-                XCTFail("testThatItGetsErrorWithIncorrectURL-error")
+                XCTFail("testThatItGetsImageErrorWithIncorrectURL-error")
                 break
             }
             
@@ -146,7 +148,108 @@ class DownloadManagerTest: XCTestCase {
         waitForExpectations(timeout: 5.0) { error in
             
             if let error = error {
-                XCTFail("testThatItGetsErrorWithIncorrectURL error: \(error)")
+                XCTFail("testThatItGetsImageErrorWithIncorrectURL error: \(error)")
+            }
+        }
+    }
+    
+    //  MARK: JSON support
+    
+    func testThatItDownloadsJSONWithCorrectJSONURL() {
+        
+        //  Given
+        let url = "https://jsonplaceholder.typicode.com/posts/1"
+        
+        let completionExpectation = expectation(description: "DownloadDataManager performs async download task to get json")
+        
+        //  When
+        DownloadDataManager.downloadJSON(url: url) { result in
+            
+            switch result {
+                
+            case let .Success(data):
+                //  Then
+                XCTAssertNotNil(data)
+                break
+                
+            default:
+                XCTFail("testThatItDownloadsJSONWithCorrectJSONURL-error")
+                break
+            }
+            
+            completionExpectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5.0) { error in
+            
+            if let error = error {
+                XCTFail("testThatItDownloadsJSONWithCorrectJSONURL error: \(error)")
+            }
+        }
+    }
+    
+    func testThatItGetsErrorWithIncorrectJSONURL() {
+        
+        //  Given
+        let url = "https://ifsstech.files.wordpress.com/2008/10/x.jpg"
+        
+        let completionExpectation = expectation(description: "DownloadDataManager performs async download task to get json")
+        
+        //  When
+        DownloadDataManager.downloadJSON(url: url) { result in
+            
+            switch result {
+                
+            case let .Failure(error):
+                //  Then
+                XCTAssertNotNil(error)
+                break
+                
+            default:
+                XCTFail("testThatItGetsErrorWithIncorrectJSONURL-error")
+                break
+            }
+            
+            completionExpectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5.0) { error in
+            
+            if let error = error {
+                XCTFail("testThatItGetsErrorWithIncorrectJSONURL error: \(error)")
+            }
+        }
+    }
+    
+    func testThatItGetsJSONErrorWithIncorrectURL() {
+        
+        //  Given
+        let url = "https://ifsstech"
+        
+        let completionExpectation = expectation(description: "DownloadDataManager performs async download task to get json")
+        
+        //  When
+        DownloadDataManager.downloadJSON(url: url) { result in
+            
+            switch result {
+                
+            case let .Failure(error):
+                //  Then
+                XCTAssertNotNil(error)
+                break
+                
+            default:
+                XCTFail("testThatItGetsJSONErrorWithIncorrectURL-error")
+                break
+            }
+            
+            completionExpectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5.0) { error in
+            
+            if let error = error {
+                XCTFail("testThatItGetsJSONErrorWithIncorrectURL error: \(error)")
             }
         }
     }
