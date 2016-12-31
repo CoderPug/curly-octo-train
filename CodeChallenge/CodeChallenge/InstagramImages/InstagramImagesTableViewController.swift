@@ -32,6 +32,8 @@ class InstagramImagesTableViewController: UITableViewController {
     
     func configureView() {
         
+        title = NSLocalizedString("INSTAGRAMVC_TITLE", comment: "INSTAGRAMVC_TITLE")
+        
         tableView.backgroundColor = Appearance.Colors.empty
         
         tableView.register(UINib.init(nibName: InstagramTableViewCellConstants.nibName,
