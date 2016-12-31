@@ -2,7 +2,7 @@
 //  InstagramTableViewCell.swift
 //  CodeChallenge
 //
-//  Created by Santex on 12/30/16.
+//  Created by Jose Torres on 12/30/16.
 //  Copyright © 2016 coderpug. All rights reserved.
 //
 
@@ -17,6 +17,7 @@ struct InstagramTableViewCellConstants {
 class InstagramTableViewCell: UITableViewCell {
     
     @IBOutlet weak var imageMedia: UIImageView!
+    var imageURL: String?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,6 +28,10 @@ class InstagramTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         
         imageMedia.image = nil
+        
+        if let imageURL = imageURL {
+            imageMedia.cancel(url: imageURL)
+        }
     }
     
     func custommize() {
@@ -34,7 +39,8 @@ class InstagramTableViewCell: UITableViewCell {
     }
     
     func load(url: String) {
-        
+
+        imageURL = url
         imageMedia.getImage(url: url)
     }
     
