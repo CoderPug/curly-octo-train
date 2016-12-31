@@ -1,5 +1,5 @@
 //
-//  InstagramImagesDetailViewController.swift
+//  InstagramImagesDetailTableViewController.swift
 //  CodeChallenge
 //
 //  Created by Jose Torres on 12/30/16.
@@ -9,7 +9,9 @@
 import UIKit
 import CPDownloader
 
-class InstagramImagesDetailViewController: UITableViewController {
+class InstagramImagesDetailTableViewController: UITableViewController {
+    
+    var data = [String: AnyObject]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +25,13 @@ class InstagramImagesDetailViewController: UITableViewController {
     
     func configureView() {
         
+        title = NSLocalizedString("INSTAGRAMDETAILVC_TITLE", comment: "INSTAGRAMDETAILVC_TITLE")
+        
+        tableView.backgroundColor = Appearance.Colors.empty
+        
+        tableView.register(UINib.init(nibName: InstagramTableViewCellConstants.nibName,
+                                      bundle: Bundle.main),
+                           forCellReuseIdentifier: InstagramTableViewCellConstants.cellIdentifier)
     }
 }
 
@@ -34,7 +43,7 @@ extension InstagramImagesDetailViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
         return UITableViewCell()
     }
     
