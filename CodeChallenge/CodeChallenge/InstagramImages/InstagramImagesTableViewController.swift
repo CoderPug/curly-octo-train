@@ -35,6 +35,18 @@ class InstagramImagesTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard segue.identifier == InstagramImagesSegueIdentifiers.toDetailTableViewController,
+            let destinationVC = segue.destination as? InstagramImagesDetailTableViewController,
+            let data = sender as? [String: AnyObject] else {
+            
+            return
+        }
+        
+        destinationVC.data = data
+    }
+    
     func configureView() {
         
         title = NSLocalizedString("INSTAGRAMVC_TITLE", comment: "INSTAGRAMVC_TITLE")
@@ -100,7 +112,6 @@ extension InstagramImagesTableViewController {
             return UITableViewCell()
         }
         
-        cell.backgroundColor = UIColor.clear
         cell.load(url: url)
         
         if requestInProcess == false && indexPath.row >= (arrayElements.count - numberOfElementsBeforeReloading) {
