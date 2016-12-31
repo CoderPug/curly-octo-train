@@ -49,13 +49,13 @@ public class CPDownloader {
             return
         }
         
-        if var arrayHandlers = self.downloadOperations.downloadsInProgressHandlers[url] {
+        if var arrayHandlers = downloadOperations.downloadsInProgressHandlers[url] {
             
             arrayHandlers.append(handler)
-            self.downloadOperations.downloadsInProgressHandlers[url] = arrayHandlers
+            downloadOperations.downloadsInProgressHandlers[url] = arrayHandlers
         } else {
             
-            self.downloadOperations.downloadsInProgressHandlers[url] = [handler]
+            downloadOperations.downloadsInProgressHandlers[url] = [handler]
             
             operation.completionBlock = { [weak self] in
                 
@@ -86,6 +86,17 @@ public class CPDownloader {
             
             downloadOperations.downloadsInProgress[url] = operation
             downloadOperations.downloadQueue.addOperation(operation)
+        }
+        
+    }
+    
+    public func cancel(url: String){
+        
+        downloadOperations.downloadsInProgressHandlers[url] = nil
+
+        if let operation = downloadOperations.downloadsInProgress[url] {
+            operation.cancel()
+            _ = downloadOperations.downloadsInProgress.removeValue(forKey: url)
         }
         
     }
