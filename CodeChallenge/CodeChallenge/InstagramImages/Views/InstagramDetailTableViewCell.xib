@@ -19,19 +19,19 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PmM-Vi-X3o">
-                        <rect key="frame" x="15" y="10" width="42" height="21"/>
+                        <rect key="frame" x="25" y="10" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oiJ-65-qlG">
-                        <rect key="frame" x="15" y="36" width="42" height="21"/>
+                        <rect key="frame" x="25" y="36" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="69X-V6-tlN">
-                        <rect key="frame" x="263" y="10" width="42" height="21"/>
+                        <rect key="frame" x="253" y="10" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -39,14 +39,14 @@
                 </subviews>
                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                 <constraints>
-                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="oiJ-65-qlG" secondAttribute="trailing" constant="15" id="EG1-pc-izF"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="oiJ-65-qlG" secondAttribute="trailing" constant="25" id="EG1-pc-izF"/>
                     <constraint firstItem="oiJ-65-qlG" firstAttribute="top" secondItem="PmM-Vi-X3o" secondAttribute="bottom" constant="5" id="EQS-Rp-QJo"/>
                     <constraint firstAttribute="bottom" secondItem="oiJ-65-qlG" secondAttribute="bottom" constant="12" id="PLD-NJ-WTx"/>
-                    <constraint firstItem="oiJ-65-qlG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="RyG-j4-Kh8"/>
-                    <constraint firstAttribute="trailing" secondItem="69X-V6-tlN" secondAttribute="trailing" constant="15" id="Win-CE-NCs"/>
+                    <constraint firstItem="oiJ-65-qlG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="RyG-j4-Kh8"/>
+                    <constraint firstAttribute="trailing" secondItem="69X-V6-tlN" secondAttribute="trailing" constant="25" id="Win-CE-NCs"/>
                     <constraint firstItem="PmM-Vi-X3o" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="lcd-5k-hBU"/>
                     <constraint firstItem="69X-V6-tlN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="nN4-Lc-GCS"/>
-                    <constraint firstItem="PmM-Vi-X3o" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="uuO-Zu-X66"/>
+                    <constraint firstItem="PmM-Vi-X3o" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="uuO-Zu-X66"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
