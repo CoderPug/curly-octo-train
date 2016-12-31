@@ -12,6 +12,7 @@ struct InstagramDetailTableViewCellConstants {
     
     static let nibName = "InstagramDetailTableViewCell"
     static let cellIdentifier = "InstagramDetailTableViewCell"
+    static let estimatedHeight: CGFloat = 70
 }
 
 class InstagramDetailTableViewCell: UITableViewCell {
