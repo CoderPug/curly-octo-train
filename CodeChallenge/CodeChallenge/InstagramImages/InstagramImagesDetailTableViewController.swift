@@ -45,19 +45,36 @@ extension InstagramImagesDetailTableViewController {
         return 2
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        switch indexPath.row {
+            
+        case 0:
+            
+            return 400
+            
+        case 1:
+            
+            return 70
+            
+        default:
+            return 0
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch indexPath.row {
             
         case 0:
             
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: InstagramTableViewCellConstants.cellIdentifier) as? InstagramTableViewCell else {
-                
-                return UITableViewCell()
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: InstagramTableViewCellConstants.cellIdentifier) as? InstagramTableViewCell,
+                let url = (data as NSDictionary).value(forKeyPath: "images.standard_resolution.url") as? String else {
+                    
+                    return UITableViewCell()
             }
             
-            cell.backgroundColor = UIColor.clear
-            cell.load(url: "")
+            cell.load(url: url)
             
             return cell
             
@@ -68,7 +85,8 @@ extension InstagramImagesDetailTableViewController {
                 return UITableViewCell()
             }
             
-            cell.backgroundColor = UIColor.clear
+            cell.load(data: data)
+            
             return cell
             
         default:
