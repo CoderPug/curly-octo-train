@@ -65,5 +65,12 @@ class InstagramDetailTableViewCell: UITableViewCell {
         labelDate.text = date
         labelDescription.text = description
     }
+    
+    func load(title: String, detail: String) {
+        
+        labelAuthor.text = title
+        labelDate.text = ""
+        labelDescription.text = detail
+    }
 
 }
