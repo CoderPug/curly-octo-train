@@ -17,6 +17,8 @@
 		C11428801E16BDBA0029107E /* InstagramTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C114287E1E16BDBA0029107E /* InstagramTableViewCell.swift */; };
 		C11428811E16BDBA0029107E /* InstagramTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C114287F1E16BDBA0029107E /* InstagramTableViewCell.xib */; };
 		C11428831E16C45C0029107E /* CPDownloader.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C114285D1E15DC2D0029107E /* CPDownloader.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C114288F1E1759840029107E /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = C114288E1E1759840029107E /* Appearance.swift */; };
+		C11428931E176CC90029107E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C11428951E176CC90029107E /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +87,9 @@
 		C11428791E16BD590029107E /* InstagramImagesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramImagesTableViewController.swift; sourceTree = "<group>"; };
 		C114287E1E16BDBA0029107E /* InstagramTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramTableViewCell.swift; sourceTree = "<group>"; };
 		C114287F1E16BDBA0029107E /* InstagramTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstagramTableViewCell.xib; sourceTree = "<group>"; };
+		C114288E1E1759840029107E /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
+		C11428941E176CC90029107E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C11428961E176CD80029107E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,7 +133,9 @@
 		C11428121E15DBB10029107E /* CodeChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				C11428951E176CC90029107E /* Localizable.strings */,
 				C11428131E15DBB10029107E /* AppDelegate.swift */,
+				C114288E1E1759840029107E /* Appearance.swift */,
 				C11428171E15DBB10029107E /* Main.storyboard */,
 				C11428781E16BD590029107E /* InstagramImages */,
 				C114281A1E15DBB10029107E /* Assets.xcassets */,
@@ -244,6 +251,7 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
 			);
 			mainGroup = C11428071E15DBB10029107E;
 			productRefGroup = C11428111E15DBB10029107E /* Products */;
@@ -284,6 +292,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C11428931E176CC90029107E /* Localizable.strings in Resources */,
 				C11428811E16BDBA0029107E /* InstagramTableViewCell.xib in Resources */,
 				C114281E1E15DBB10029107E /* LaunchScreen.storyboard in Resources */,
 				C114281B1E15DBB10029107E /* Assets.xcassets in Resources */,
@@ -308,6 +317,7 @@
 				C114287B1E16BD590029107E /* InstagramImagesTableViewController.swift in Sources */,
 				C11428141E15DBB10029107E /* AppDelegate.swift in Sources */,
 				C11428801E16BDBA0029107E /* InstagramTableViewCell.swift in Sources */,
+				C114288F1E1759840029107E /* Appearance.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,6 +366,15 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		C11428951E176CC90029107E /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C11428941E176CC90029107E /* en */,
+				C11428961E176CD80029107E /* es */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -363,6 +382,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -413,6 +433,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
