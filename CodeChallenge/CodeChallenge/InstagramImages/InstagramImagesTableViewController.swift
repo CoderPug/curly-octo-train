@@ -9,6 +9,11 @@
 import UIKit
 import CPDownloader
 
+struct InstagramImagesSegueIdentifiers {
+    
+    static let toDetailTableViewController = "showDetail"
+}
+
 class InstagramImagesTableViewController: UITableViewController {
 
     var arrayElements = [AnyObject]()
@@ -28,6 +33,18 @@ class InstagramImagesTableViewController: UITableViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard segue.identifier == InstagramImagesSegueIdentifiers.toDetailTableViewController,
+            let destinationVC = segue.destination as? InstagramImagesDetailTableViewController,
+            let data = sender as? [String: AnyObject] else {
+            
+            return
+        }
+        
+        destinationVC.data = data
     }
     
     func configureView() {
@@ -113,14 +130,9 @@ extension InstagramImagesTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard let cell = tableView.cellForRow(at: indexPath) as? InstagramTableViewCell,
-            let item = arrayElements[indexPath.row] as? NSDictionary,
-            let url = item.value(forKeyPath: "images.standard_resolution.url") as? String else {
-            
-            return
-        }
+        let item = arrayElements[indexPath.row]
         
-        cell.cancel(url: url)
+        performSegue(withIdentifier: InstagramImagesSegueIdentifiers.toDetailTableViewController, sender: item)
     }
     
 }

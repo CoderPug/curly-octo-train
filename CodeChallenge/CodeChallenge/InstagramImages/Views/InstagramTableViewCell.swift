@@ -36,6 +36,7 @@ class InstagramTableViewCell: UITableViewCell {
     
     func custommize() {
         
+        backgroundColor = UIColor.clear
     }
     
     func load(url: String) {

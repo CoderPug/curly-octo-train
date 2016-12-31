@@ -41,10 +41,31 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="beI-q8-sWZ"/>
+                    <connections>
+                        <segue destination="IlI-Tx-x9s" kind="show" identifier="showDetail" id="nUu-cX-gmb"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DZ2-hD-VjA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1396" y="-33"/>
+        </scene>
+        <!--Instagram Images Detail Table View Controller-->
+        <scene sceneID="g5x-1y-s5d">
+            <objects>
+                <tableViewController id="IlI-Tx-x9s" customClass="InstagramImagesDetailTableViewController" customModule="CodeChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" id="3Z7-u7-1Vh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="IlI-Tx-x9s" id="D3D-r9-sUm"/>
+                            <outlet property="delegate" destination="IlI-Tx-x9s" id="Lpo-a4-x9C"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tCi-h6-uKW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2400.8000000000002" y="-34.632683658170919"/>
         </scene>
         <!--Item-->
         <scene sceneID="AsX-LS-Ggs">
