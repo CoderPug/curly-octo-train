@@ -34,12 +34,14 @@ enum SupportedTypes {
 /// - requestFailed: request failed.
 /// - couldNotReadResponse: request succeeded but response data can not be read.
 /// - couldNotObtainImage: request succeeded but response data can not be converted to image.
+/// - couldNotObtainJSON: request succeeded but response data can not be converted to json.
 enum DownloadManagerError: Error {
     case unknown
     case wrongURL
     case requestFailed(Error?)
     case couldNotReadResponse(Error?)
     case couldNotObtainImage
+    case couldNotObtainJSON
 }
 
 //  MARK: DownloadDataManager
@@ -146,6 +148,42 @@ extension DownloadDataManager {
                         return
                 }
                 handler(.Success(image))
+                break
+            }
+        }
+    }
+    
+}
+
+//  MARK: DownloadDataManager+JSON
+
+extension DownloadDataManager {
+    
+    internal typealias downloadDataManagerJSONHandler = (Result<[String: AnyObject]>) -> Swift.Void
+    
+    internal static func downloadJSON(url: String, handler: @escaping downloadDataManagerJSONHandler) {
+        
+        download(url: url) { result in
+            
+            switch result {
+                
+            case let .Failure(error):
+                
+                handler(.Failure(error))
+                break
+                
+            case let .Success(data, type):
+                
+                guard type == .json,
+                    let data = data,
+                    let result = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject],
+                    let json = result else {
+                        
+                        handler(.Failure(DownloadManagerError.couldNotObtainJSON))
+                        return
+                }
+                
+                handler(.Success(json))
                 break
             }
         }
