@@ -100,6 +100,7 @@ extension InstagramImagesTableViewController {
             return UITableViewCell()
         }
         
+        cell.backgroundColor = UIColor.clear
         cell.load(url: url)
         
         if requestInProcess == false && indexPath.row >= (arrayElements.count - numberOfElementsBeforeReloading) {

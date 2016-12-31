@@ -32,6 +32,9 @@ class InstagramImagesDetailTableViewController: UITableViewController {
         tableView.register(UINib.init(nibName: InstagramTableViewCellConstants.nibName,
                                       bundle: Bundle.main),
                            forCellReuseIdentifier: InstagramTableViewCellConstants.cellIdentifier)
+        tableView.register(UINib.init(nibName: InstagramDetailTableViewCellConstants.nibName,
+                                      bundle: Bundle.main),
+                           forCellReuseIdentifier: InstagramDetailTableViewCellConstants.cellIdentifier)
     }
 }
 
@@ -39,12 +42,38 @@ extension InstagramImagesDetailTableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 0
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        return UITableViewCell()
+        switch indexPath.row {
+            
+        case 0:
+            
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: InstagramTableViewCellConstants.cellIdentifier) as? InstagramTableViewCell else {
+                
+                return UITableViewCell()
+            }
+            
+            cell.backgroundColor = UIColor.clear
+            cell.load(url: "")
+            
+            return cell
+            
+        case 1:
+            
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: InstagramDetailTableViewCellConstants.cellIdentifier) as? InstagramDetailTableViewCell else {
+                
+                return UITableViewCell()
+            }
+            
+            cell.backgroundColor = UIColor.clear
+            return cell
+            
+        default:
+            return UITableViewCell()
+        }
     }
     
 }
