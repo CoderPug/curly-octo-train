@@ -28,6 +28,9 @@ class InstagramDetailTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         
+        labelAuthor.text = ""
+        labelDate.text = ""
+        labelDescription.text = ""
     }
     
     func custommize() {
@@ -43,6 +46,10 @@ class InstagramDetailTableViewCell: UITableViewCell {
         labelAuthor.textColor = Appearance.Colors.third
         labelDate.textColor = Appearance.Colors.third
         labelDescription.textColor = Appearance.Colors.third
+        
+        labelAuthor.text = ""
+        labelDate.text = ""
+        labelDescription.text = ""
     }
     
     func load(data: [String: AnyObject]) {
