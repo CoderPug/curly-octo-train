@@ -34,7 +34,7 @@ class DownloadOperationsTest: XCTestCase {
         
         //  Given
         //  When
-        let operation = DownloadImageOperation()
+        let operation = DownloadOperation<UIImage>()
         XCTAssertTrue(operation.isAsynchronous)
     }
 
@@ -48,13 +48,13 @@ class DownloadOperationsTest: XCTestCase {
         let completionExpectation = expectation(description: "DownloadImageOperation performs async download task with correct URL")
         
         //  When
-        let operation = DownloadImageOperation()
+        let operation = DownloadOperation<UIImage>()
         operation.url = url
         
         operation.completionBlock = {
             
             //  Then
-            XCTAssertNotNil(operation.image, "Image nil")
+            XCTAssertNotNil(operation.object, "Image nil")
             
             completionExpectation.fulfill()
         }
@@ -76,12 +76,12 @@ class DownloadOperationsTest: XCTestCase {
         let completionExpectation = expectation(description: "DownloadImageOperation performs async download task withour URL")
         
         //  When
-        let operation = DownloadImageOperation()
+        let operation = DownloadOperation<UIImage>()
         
         operation.completionBlock = {
             
             //  Then
-            XCTAssertNil(operation.image, "Image not nil")
+            XCTAssertNil(operation.object, "Image not nil")
             
             completionExpectation.fulfill()
         }
