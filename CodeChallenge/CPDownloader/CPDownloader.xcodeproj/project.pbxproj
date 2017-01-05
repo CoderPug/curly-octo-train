@@ -8,8 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		C11428471E15DC190029107E /* CPDownloader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C114283D1E15DC190029107E /* CPDownloader.framework */; };
-		C114284C1E15DC190029107E /* CPDownloaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C114284B1E15DC190029107E /* CPDownloaderTests.swift */; };
+		C114284C1E15DC190029107E /* DownloadManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C114284B1E15DC190029107E /* DownloadManagerTest.swift */; };
 		C114284E1E15DC190029107E /* CPDownloader.h in Headers */ = {isa = PBXBuildFile; fileRef = C11428401E15DC190029107E /* CPDownloader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C11428611E15DDAE0029107E /* CPDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11428601E15DDAE0029107E /* CPDownloader.swift */; };
+		C11428641E15DE590029107E /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11428631E15DE590029107E /* DownloadManager.swift */; };
+		C11428691E15FDDD0029107E /* DownloadOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11428681E15FDDD0029107E /* DownloadOperations.swift */; };
+		C114286B1E1602820029107E /* DownloadOperationsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C114286A1E1602820029107E /* DownloadOperationsTest.swift */; };
+		C114286D1E160F2A0029107E /* CPDownloaderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C114286C1E160F2A0029107E /* CPDownloaderTest.swift */; };
+		C114286F1E1617010029107E /* UIImageView+CPDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C114286E1E1617010029107E /* UIImageView+CPDownloader.swift */; };
+		C11428711E162B2B0029107E /* UIImageView+CPDownloaderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11428701E162B2B0029107E /* UIImageView+CPDownloaderTest.swift */; };
+		C11428731E1633F10029107E /* DownloadCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11428721E1633F10029107E /* DownloadCache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,8 +35,16 @@
 		C11428401E15DC190029107E /* CPDownloader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPDownloader.h; sourceTree = "<group>"; };
 		C11428411E15DC190029107E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C11428461E15DC190029107E /* CPDownloaderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CPDownloaderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C114284B1E15DC190029107E /* CPDownloaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPDownloaderTests.swift; sourceTree = "<group>"; };
+		C114284B1E15DC190029107E /* DownloadManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManagerTest.swift; sourceTree = "<group>"; };
 		C114284D1E15DC190029107E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C11428601E15DDAE0029107E /* CPDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPDownloader.swift; sourceTree = "<group>"; };
+		C11428631E15DE590029107E /* DownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
+		C11428681E15FDDD0029107E /* DownloadOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadOperations.swift; sourceTree = "<group>"; };
+		C114286A1E1602820029107E /* DownloadOperationsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadOperationsTest.swift; sourceTree = "<group>"; };
+		C114286C1E160F2A0029107E /* CPDownloaderTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPDownloaderTest.swift; sourceTree = "<group>"; };
+		C114286E1E1617010029107E /* UIImageView+CPDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+CPDownloader.swift"; sourceTree = "<group>"; };
+		C11428701E162B2B0029107E /* UIImageView+CPDownloaderTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+CPDownloaderTest.swift"; sourceTree = "<group>"; };
+		C11428721E1633F10029107E /* DownloadCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadCache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +87,9 @@
 		C114283F1E15DC190029107E /* CPDownloader */ = {
 			isa = PBXGroup;
 			children = (
+				C11428601E15DDAE0029107E /* CPDownloader.swift */,
+				C114286E1E1617010029107E /* UIImageView+CPDownloader.swift */,
+				C11428621E15DE4E0029107E /* DownloadManager */,
 				C11428401E15DC190029107E /* CPDownloader.h */,
 				C11428411E15DC190029107E /* Info.plist */,
 			);
@@ -80,10 +99,23 @@
 		C114284A1E15DC190029107E /* CPDownloaderTests */ = {
 			isa = PBXGroup;
 			children = (
-				C114284B1E15DC190029107E /* CPDownloaderTests.swift */,
+				C114286C1E160F2A0029107E /* CPDownloaderTest.swift */,
+				C11428701E162B2B0029107E /* UIImageView+CPDownloaderTest.swift */,
+				C114284B1E15DC190029107E /* DownloadManagerTest.swift */,
+				C114286A1E1602820029107E /* DownloadOperationsTest.swift */,
 				C114284D1E15DC190029107E /* Info.plist */,
 			);
 			path = CPDownloaderTests;
+			sourceTree = "<group>";
+		};
+		C11428621E15DE4E0029107E /* DownloadManager */ = {
+			isa = PBXGroup;
+			children = (
+				C11428631E15DE590029107E /* DownloadManager.swift */,
+				C11428681E15FDDD0029107E /* DownloadOperations.swift */,
+				C11428721E1633F10029107E /* DownloadCache.swift */,
+			);
+			path = DownloadManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,6 +181,7 @@
 					C114283C1E15DC190029107E = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = MYCBG3H474;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Manual;
 					};
 					C11428451E15DC190029107E = {
@@ -197,6 +230,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C11428611E15DDAE0029107E /* CPDownloader.swift in Sources */,
+				C11428691E15FDDD0029107E /* DownloadOperations.swift in Sources */,
+				C114286F1E1617010029107E /* UIImageView+CPDownloader.swift in Sources */,
+				C11428641E15DE590029107E /* DownloadManager.swift in Sources */,
+				C11428731E1633F10029107E /* DownloadCache.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,7 +242,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C114284C1E15DC190029107E /* CPDownloaderTests.swift in Sources */,
+				C114284C1E15DC190029107E /* DownloadManagerTest.swift in Sources */,
+				C114286B1E1602820029107E /* DownloadOperationsTest.swift in Sources */,
+				C11428711E162B2B0029107E /* UIImageView+CPDownloaderTest.swift in Sources */,
+				C114286D1E160F2A0029107E /* CPDownloaderTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,6 +362,7 @@
 		C11428521E15DC190029107E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
@@ -334,6 +376,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.coderpug.CPDownloader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -341,6 +384,7 @@
 		C11428531E15DC190029107E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
@@ -361,6 +405,7 @@
 		C11428551E15DC190029107E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = CPDownloaderTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.coderpug.CPDownloaderTests;
@@ -372,6 +417,7 @@
 		C11428561E15DC190029107E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = CPDownloaderTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.coderpug.CPDownloaderTests;
