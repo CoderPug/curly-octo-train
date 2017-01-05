@@ -22,22 +22,20 @@ enum CPDownloaderError: Error {
 /// CPDownloader handles data download.
 public class CPDownloader {
     
-    public typealias getImageHandler = (Result<UIImage>) -> Swift.Void
+    public typealias generalHandler = (Result<AnyObject>) -> Swift.Void
     
-    public typealias getJSONHandler = (Result<[String: AnyObject]>) -> Swift.Void
+//    public typealias getJSONHandler = (Result<[String: AnyObject]>) -> Swift.Void
     
     public static let sharedInstance = CPDownloader()
     
     fileprivate let downloadOperations = DownloadOperations()
     
-    fileprivate let downloadCache = DownloadCache()
-    
     /// Function for getting Image from URL
     ///
     /// - Parameters:
     ///   - url: String url
-    ///   - handler: Handler block
-    public func getImage(url: String, handler: @escaping getImageHandler) {
+    ///   - handler: Handler closure
+    public func getImage(url: String, handler: @escaping generalHandler) {
         
         let operation = DownloadOperation<UIImage>()
         operation.url = url
@@ -76,7 +74,7 @@ public class CPDownloader {
                     return
                 }
                 
-                self?.downloadCache.setObject(object: image, key: url)
+                DownloadCache.sharedInstance.setObject(object: image, key: url)
                 
                 for handler in arrayHandlers {
                     
@@ -105,22 +103,64 @@ public class CPDownloader {
     
     //  MARK: +JSON
     
-    public func getJSON(url: String, handler: @escaping getJSONHandler) {
-
-        DownloadDataManager.downloadJSON(url: url) { result in
+    /// Function for getting JSON data from URL
+    ///
+    /// - Parameters:
+    ///   - url: String url
+    ///   - handler: Handler closure
+    public func getJSON(url: String, handler: @escaping generalHandler) {
+        
+        let operation = DownloadOperation<[String: AnyObject]>()
+        operation.url = url
+        
+        if let cachedObject = DownloadCache.sharedInstance.getObject(key: url) {
             
-            switch result {
-                
-            case .Failure(_):
-                
-                break
-                
-            case let .Success(json):
-                
-                handler(.Success(json))
-                break
+            if let cachedJSON = cachedObject as? [String: AnyObject] {
+                print("showing cached json")
+                handler(.Success(cachedJSON as AnyObject))
             }
+            return
+        }
+        
+        if var arrayHandlers = downloadOperations.downloadsInProgressHandlers[url] {
+            
+            arrayHandlers.append(handler)
+            downloadOperations.downloadsInProgressHandlers[url] = arrayHandlers
+        } else {
+            
+            downloadOperations.downloadsInProgressHandlers[url] = [handler]
+            
+            operation.completionBlock = { [weak self] in
+                
+                if operation.isCancelled {
+                    
+                    handler(.Failure(CPDownloaderError.operationCanceled))
+                    return
+                }
+                
+                _ = self?.downloadOperations.downloadsInProgress.removeValue(forKey: url)
+                
+                guard let arrayHandlers = self?.downloadOperations.downloadsInProgressHandlers[url],
+                    let image = operation.object else {
+                        
+                        handler(.Failure(CPDownloaderError.couldNotObtainImage))
+                        return
+                }
+                
+                DownloadCache.sharedInstance.setObject(object: image as AnyObject, key: url)
+                
+                for handler in arrayHandlers {
+                    
+                    handler(.Success(image as AnyObject))
+                }
+                
+                self?.downloadOperations.downloadsInProgressHandlers[url] = nil
+            }
+            
+            downloadOperations.downloadsInProgress[url] = operation
+            downloadOperations.downloadQueue.addOperation(operation)
         }
     }
+    
 }
 

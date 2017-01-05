@@ -20,7 +20,7 @@ enum State: String {
 
 class DownloadOperations {
     
-    var downloadsInProgressHandlers = [String: Array<(Result<UIImage>)->()>]()
+    var downloadsInProgressHandlers = [String: Array<(Result<AnyObject>)->()>]()
     var downloadsInProgress = [String: Operation]()
     var downloadQueue: OperationQueue = {
         
@@ -121,6 +121,29 @@ class DownloadOperation<T>: Operation {
                 }
                 
             } else if T.self is [String: AnyObject].Type {
+                
+                DownloadDataManager.downloadJSON(url: url) { [weak self] result in
+                    
+                    if self?.isCancelled == true {
+                        
+                        self?.state = .finished
+                    } else {
+                        
+                        switch result {
+                            
+                        case .Failure(_):
+                            
+                            self?.state = .finished
+                            break
+                            
+                        case let .Success(json):
+                            
+                            self?.object = json as? T
+                            self?.state = .finished
+                            break
+                        }
+                    }
+                }
                 
             } else {
                 
