@@ -7,10 +7,29 @@
 //
 
 import UIKit
+import CPDownloader
 
 class OtherTypesTableViewController: UITableViewController {
 
     var otherTypeList = [["name" : ".json",
+                          "url" : "https://api.instagram.com/v1/users/self/media/recent/?access_token=2253601763.1677ed0.d35015431cb744cd8e643bbdc3131c6d" ],
+                         ["name" : ".json",
+                          "url" : "https://api.instagram.com/v1/users/self/media/recent/?access_token=2253601763.1677ed0.d35015431cb744cd8e643bbdc3131c6d" ],
+                         ["name" : ".json",
+                          "url" : "https://api.instagram.com/v1/users/self/media/recent/?access_token=2253601763.1677ed0.d35015431cb744cd8e643bbdc3131c6d" ],
+                         ["name" : ".json",
+                          "url" : "https://api.instagram.com/v1/users/self/media/recent/?access_token=2253601763.1677ed0.d35015431cb744cd8e643bbdc3131c6d" ],
+                         ["name" : ".json",
+                          "url" : "https://api.instagram.com/v1/users/self/media/recent/?access_token=2253601763.1677ed0.d35015431cb744cd8e643bbdc3131c6d" ],
+                         ["name" : ".json",
+                          "url" : "https://api.instagram.com/v1/users/self/media/recent/?access_token=2253601763.1677ed0.d35015431cb744cd8e643bbdc3131c6d" ],
+                         ["name" : ".json",
+                          "url" : "https://api.instagram.com/v1/users/self/media/recent/?access_token=2253601763.1677ed0.d35015431cb744cd8e643bbdc3131c6d" ],
+                         ["name" : ".json",
+                          "url" : "https://api.instagram.com/v1/users/self/media/recent/?access_token=2253601763.1677ed0.d35015431cb744cd8e643bbdc3131c6d" ],
+                         ["name" : ".json",
+                          "url" : "https://api.instagram.com/v1/users/self/media/recent/?access_token=2253601763.1677ed0.d35015431cb744cd8e643bbdc3131c6d" ],
+                         ["name" : ".json",
                           "url" : "https://api.instagram.com/v1/users/self/media/recent/?access_token=2253601763.1677ed0.d35015431cb744cd8e643bbdc3131c6d" ]]
     
     override func viewDidLoad() {
@@ -18,7 +37,7 @@ class OtherTypesTableViewController: UITableViewController {
         
         configureView()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -32,9 +51,6 @@ class OtherTypesTableViewController: UITableViewController {
         tableView.register(UINib.init(nibName: InstagramDetailTableViewCellConstants.nibName,
                                       bundle: Bundle.main),
                            forCellReuseIdentifier: InstagramDetailTableViewCellConstants.cellIdentifier)
-        
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = InstagramDetailTableViewCellConstants.estimatedHeight
     }
 }
 
