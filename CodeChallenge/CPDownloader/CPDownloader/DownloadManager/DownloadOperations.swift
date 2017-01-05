@@ -33,10 +33,10 @@ class DownloadOperations {
 
 //  DownloadImageOperation
 
-class DownloadImageOperation: Operation {
+class DownloadOperation<T>: Operation {
     
     var url: String?
-    var image: UIImage?
+    var object: T?
     
     var state = State.ready {
         
@@ -95,28 +95,37 @@ class DownloadImageOperation: Operation {
                 return
             }
             
-            DownloadDataManager.downloadImage(url: url) { [weak self] result in
+            if T.self is UIImage.Type {
                 
-                if self?.isCancelled == true {
+                DownloadDataManager.downloadImage(url: url) { [weak self] result in
                     
-                    self?.state = .finished
-                } else {
-                    
-                    switch result {
-                        
-                    case .Failure(_):
+                    if self?.isCancelled == true {
                         
                         self?.state = .finished
-                        break
+                    } else {
                         
-                    case let .Success(image):
-                        
-                        self?.image = image
-                        self?.state = .finished
-                        break
+                        switch result {
+                            
+                        case .Failure(_):
+                            
+                            self?.state = .finished
+                            break
+                            
+                        case let .Success(image):
+                            
+                            self?.object = image as? T
+                            self?.state = .finished
+                            break
+                        }
                     }
                 }
+                
+            } else if T.self is [String: AnyObject].Type {
+                
+            } else {
+                
             }
+            
         }
     }
 }

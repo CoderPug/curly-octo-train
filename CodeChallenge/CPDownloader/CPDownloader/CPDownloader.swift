@@ -39,7 +39,7 @@ public class CPDownloader {
     ///   - handler: Handler block
     public func getImage(url: String, handler: @escaping getImageHandler) {
         
-        let operation = DownloadImageOperation()
+        let operation = DownloadOperation<UIImage>()
         operation.url = url
         
         if let cachedObject = DownloadCache.sharedInstance.getObject(key: url) {
@@ -70,7 +70,7 @@ public class CPDownloader {
                 _ = self?.downloadOperations.downloadsInProgress.removeValue(forKey: url)
                 
                 guard let arrayHandlers = self?.downloadOperations.downloadsInProgressHandlers[url],
-                    let image = operation.image else {
+                    let image = operation.object else {
                     
                     handler(.Failure(CPDownloaderError.couldNotObtainImage))
                     return
