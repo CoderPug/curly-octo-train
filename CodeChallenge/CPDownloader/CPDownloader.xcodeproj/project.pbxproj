@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0841769D1E1F3E73003A353C /* DownloadableTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841769C1E1F3E73003A353C /* DownloadableTypes.swift */; };
 		C11428471E15DC190029107E /* CPDownloader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C114283D1E15DC190029107E /* CPDownloader.framework */; };
 		C114284C1E15DC190029107E /* DownloadManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C114284B1E15DC190029107E /* DownloadManagerTest.swift */; };
 		C114284E1E15DC190029107E /* CPDownloader.h in Headers */ = {isa = PBXBuildFile; fileRef = C11428401E15DC190029107E /* CPDownloader.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -31,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0841769C1E1F3E73003A353C /* DownloadableTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadableTypes.swift; sourceTree = "<group>"; };
 		C114283D1E15DC190029107E /* CPDownloader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CPDownloader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C11428401E15DC190029107E /* CPDownloader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPDownloader.h; sourceTree = "<group>"; };
 		C11428411E15DC190029107E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 		C11428621E15DE4E0029107E /* DownloadManager */ = {
 			isa = PBXGroup;
 			children = (
+				0841769C1E1F3E73003A353C /* DownloadableTypes.swift */,
 				C11428631E15DE590029107E /* DownloadManager.swift */,
 				C11428681E15FDDD0029107E /* DownloadOperations.swift */,
 				C11428721E1633F10029107E /* DownloadCache.swift */,
@@ -235,6 +238,7 @@
 				C114286F1E1617010029107E /* UIImageView+CPDownloader.swift in Sources */,
 				C11428641E15DE590029107E /* DownloadManager.swift in Sources */,
 				C11428731E1633F10029107E /* DownloadCache.swift in Sources */,
+				0841769D1E1F3E73003A353C /* DownloadableTypes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

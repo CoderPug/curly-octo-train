@@ -34,7 +34,7 @@ public class CPDownloader {
     ///   - object: Generic parameter type
     ///   - url: String url
     ///   - handler: Handler closure
-    fileprivate func getResource<T>(_ object: T.Type,
+    fileprivate func getResource<T: CPDownloadable>(_ object: T.Type,
                                  url: String,
                                  handler: @escaping (Result<AnyObject>) -> Swift.Void) {
         

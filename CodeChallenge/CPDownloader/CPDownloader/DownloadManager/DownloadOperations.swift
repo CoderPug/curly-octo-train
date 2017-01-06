@@ -33,7 +33,7 @@ class DownloadOperations {
 
 //  DownloadImageOperation
 
-class DownloadOperation<T>: Operation {
+class DownloadOperation<T: CPDownloadable>: Operation {
     
     var url: String?
     var object: T?
@@ -95,60 +95,8 @@ class DownloadOperation<T>: Operation {
                 return
             }
             
-            if T.self is UIImage.Type {
-                
-                DownloadDataManager.downloadImage(url: url) { [weak self] result in
-                    
-                    if self?.isCancelled == true {
-                        
-                        self?.state = .finished
-                    } else {
-                        
-                        switch result {
-                            
-                        case .Failure(_):
-                            
-                            self?.state = .finished
-                            break
-                            
-                        case let .Success(image):
-                            
-                            self?.object = image as? T
-                            self?.state = .finished
-                            break
-                        }
-                    }
-                }
-                
-            } else if T.self is [String: AnyObject].Type {
-                
-                DownloadDataManager.downloadJSON(url: url) { [weak self] result in
-                    
-                    if self?.isCancelled == true {
-                        
-                        self?.state = .finished
-                    } else {
-                        
-                        switch result {
-                            
-                        case .Failure(_):
-                            
-                            self?.state = .finished
-                            break
-                            
-                        case let .Success(json):
-                            
-                            self?.object = json as? T
-                            self?.state = .finished
-                            break
-                        }
-                    }
-                }
-                
-            } else {
-                
-            }
-            
+            T.downloadResourceOperation(operation: self, url: url)            
         }
     }
+    
 }
