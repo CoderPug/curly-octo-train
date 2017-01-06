@@ -28,12 +28,12 @@ public class CPDownloader {
     
     fileprivate let downloadOperations = DownloadOperations()
     
-    /// <#Description#>
+    /// Generic function for getting resource from a given URL
     ///
     /// - Parameters:
-    ///   - object: <#object description#>
-    ///   - url: <#url description#>
-    ///   - handler: <#handler description#>
+    ///   - object: Generic parameter type
+    ///   - url: String url
+    ///   - handler: Handler closure
     fileprivate func getResource<T>(_ object: T.Type,
                                  url: String,
                                  handler: @escaping (Result<AnyObject>) -> Swift.Void) {
