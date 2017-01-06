@@ -1,5 +1,5 @@
 //
-//  UIImageView+CPDownloader.swift
+//  Extensions+CPDownloader.swift
 //  CPDownloader
 //
 //  Created by Jose Torres on 12/29/16.
