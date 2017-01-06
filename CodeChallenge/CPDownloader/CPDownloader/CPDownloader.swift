@@ -16,7 +16,7 @@ import Foundation
 enum CPDownloaderError: Error {
     case unknown
     case operationCanceled
-    case couldNotObtainImage
+    case couldNotObtainObject
 }
 
 /// CPDownloader handles data download.
@@ -24,11 +24,85 @@ public class CPDownloader {
     
     public typealias generalHandler = (Result<AnyObject>) -> Swift.Void
     
-//    public typealias getJSONHandler = (Result<[String: AnyObject]>) -> Swift.Void
-    
     public static let sharedInstance = CPDownloader()
     
     fileprivate let downloadOperations = DownloadOperations()
+    
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - object: <#object description#>
+    ///   - url: <#url description#>
+    ///   - handler: <#handler description#>
+    fileprivate func getResource<T>(_ object: T.Type,
+                                 url: String,
+                                 handler: @escaping (Result<AnyObject>) -> Swift.Void) {
+        
+        let operation = DownloadOperation<T>()
+        operation.url = url
+        
+        if let cachedObject = DownloadCache.sharedInstance.getObject(key: url) {
+            
+            print("showing cached data")
+            handler(.Success(cachedObject))
+            return
+        }
+        
+        if var arrayHandlers = downloadOperations.downloadsInProgressHandlers[url] {
+            
+            arrayHandlers.append(handler)
+            downloadOperations.downloadsInProgressHandlers[url] = arrayHandlers
+        } else {
+            
+            downloadOperations.downloadsInProgressHandlers[url] = [handler]
+            
+            operation.completionBlock = { [weak self] in
+                
+                if operation.isCancelled {
+                    
+                    handler(.Failure(CPDownloaderError.operationCanceled))
+                    return
+                }
+                
+                _ = self?.downloadOperations.downloadsInProgress.removeValue(forKey: url)
+                
+                guard let arrayHandlers = self?.downloadOperations.downloadsInProgressHandlers[url],
+                    let object = operation.object else {
+                        
+                        handler(.Failure(CPDownloaderError.couldNotObtainObject))
+                        return
+                }
+                
+                DownloadCache.sharedInstance.setObject(object: object as AnyObject, key: url)
+                
+                for handler in arrayHandlers {
+                    
+                    handler(.Success(object as AnyObject))
+                }
+                
+                self?.downloadOperations.downloadsInProgressHandlers[url] = nil
+            }
+            
+            downloadOperations.downloadsInProgress[url] = operation
+            downloadOperations.downloadQueue.addOperation(operation)
+        }
+    }
+    
+    public func cancel(url: String){
+        
+        downloadOperations.downloadsInProgressHandlers[url] = nil
+        
+        if let operation = downloadOperations.downloadsInProgress[url] {
+            operation.cancel()
+            _ = downloadOperations.downloadsInProgress.removeValue(forKey: url)
+        }
+    }
+    
+}
+
+//  MARK: +UIImage
+
+extension CPDownloader {
     
     /// Function for getting Image from URL
     ///
@@ -37,71 +111,14 @@ public class CPDownloader {
     ///   - handler: Handler closure
     public func getImage(url: String, handler: @escaping generalHandler) {
         
-        let operation = DownloadOperation<UIImage>()
-        operation.url = url
-        
-        if let cachedObject = DownloadCache.sharedInstance.getObject(key: url) {
-            
-            if let cachedImage = cachedObject as? UIImage {
-                print("showing cached image")
-                handler(.Success(cachedImage))
-            }
-            return
-        }
-        
-        if var arrayHandlers = downloadOperations.downloadsInProgressHandlers[url] {
-            
-            arrayHandlers.append(handler)
-            downloadOperations.downloadsInProgressHandlers[url] = arrayHandlers
-        } else {
-            
-            downloadOperations.downloadsInProgressHandlers[url] = [handler]
-            
-            operation.completionBlock = { [weak self] in
-                
-                if operation.isCancelled {
-                    
-                    handler(.Failure(CPDownloaderError.operationCanceled))
-                    return
-                }
-                
-                _ = self?.downloadOperations.downloadsInProgress.removeValue(forKey: url)
-                
-                guard let arrayHandlers = self?.downloadOperations.downloadsInProgressHandlers[url],
-                    let image = operation.object else {
-                    
-                    handler(.Failure(CPDownloaderError.couldNotObtainImage))
-                    return
-                }
-                
-                DownloadCache.sharedInstance.setObject(object: image, key: url)
-                
-                for handler in arrayHandlers {
-                    
-                    handler(.Success(image))
-                }
-                
-                self?.downloadOperations.downloadsInProgressHandlers[url] = nil
-            }
-            
-            downloadOperations.downloadsInProgress[url] = operation
-            downloadOperations.downloadQueue.addOperation(operation)
-        }
-        
+        getResource(UIImage.self, url: url, handler: handler)
     }
-    
-    public func cancel(url: String){
-        
-        downloadOperations.downloadsInProgressHandlers[url] = nil
 
-        if let operation = downloadOperations.downloadsInProgress[url] {
-            operation.cancel()
-            _ = downloadOperations.downloadsInProgress.removeValue(forKey: url)
-        }
-        
-    }
-    
-    //  MARK: +JSON
+}
+
+//  MARK: +JSON
+
+extension CPDownloader {
     
     /// Function for getting JSON data from URL
     ///
@@ -110,57 +127,7 @@ public class CPDownloader {
     ///   - handler: Handler closure
     public func getJSON(url: String, handler: @escaping generalHandler) {
         
-        let operation = DownloadOperation<[String: AnyObject]>()
-        operation.url = url
-        
-        if let cachedObject = DownloadCache.sharedInstance.getObject(key: url) {
-            
-            if let cachedJSON = cachedObject as? [String: AnyObject] {
-                print("showing cached json")
-                handler(.Success(cachedJSON as AnyObject))
-            }
-            return
-        }
-        
-        if var arrayHandlers = downloadOperations.downloadsInProgressHandlers[url] {
-            
-            arrayHandlers.append(handler)
-            downloadOperations.downloadsInProgressHandlers[url] = arrayHandlers
-        } else {
-            
-            downloadOperations.downloadsInProgressHandlers[url] = [handler]
-            
-            operation.completionBlock = { [weak self] in
-                
-                if operation.isCancelled {
-                    
-                    handler(.Failure(CPDownloaderError.operationCanceled))
-                    return
-                }
-                
-                _ = self?.downloadOperations.downloadsInProgress.removeValue(forKey: url)
-                
-                guard let arrayHandlers = self?.downloadOperations.downloadsInProgressHandlers[url],
-                    let image = operation.object else {
-                        
-                        handler(.Failure(CPDownloaderError.couldNotObtainImage))
-                        return
-                }
-                
-                DownloadCache.sharedInstance.setObject(object: image as AnyObject, key: url)
-                
-                for handler in arrayHandlers {
-                    
-                    handler(.Success(image as AnyObject))
-                }
-                
-                self?.downloadOperations.downloadsInProgressHandlers[url] = nil
-            }
-            
-            downloadOperations.downloadsInProgress[url] = operation
-            downloadOperations.downloadQueue.addOperation(operation)
-        }
+        getResource([String: AnyObject].self, url: url, handler: handler)
     }
-    
-}
 
+}
