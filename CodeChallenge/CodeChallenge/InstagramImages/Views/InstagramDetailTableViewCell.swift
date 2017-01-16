@@ -47,6 +47,11 @@ class InstagramDetailTableViewCell: UITableViewCell {
         labelDescription.text = ""
     }
     
+    override func prepareForReuse() {
+        
+        labelDescription.text = ""
+    }
+    
     func load(data: [String: AnyObject]) {
         
         guard let author = (data as NSDictionary).value(forKeyPath: "caption.from.full_name") as? String,
@@ -61,11 +66,17 @@ class InstagramDetailTableViewCell: UITableViewCell {
         labelDescription.text = description
     }
     
-    func load(title: String, detail: String) {
+    func loadJSON(title: String, detail: String) {
         
         labelAuthor.text = title
         labelDate.text = ""
         labelDescription.getJSON(url: detail)
     }
     
+    func loadFile(title: String, detail: String) {
+        
+        labelAuthor.text = title
+        labelDate.text = ""
+        labelDescription.getFile(url: detail)
+    }
 }

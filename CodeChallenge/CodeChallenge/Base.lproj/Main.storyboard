@@ -71,7 +71,7 @@
         <scene sceneID="AsX-LS-Ggs">
             <objects>
                 <navigationController id="YIS-FF-HCC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="GAP-sZ-uL8"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="icon-instagram" id="GAP-sZ-uL8"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9Si-BT-bT8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -107,7 +107,7 @@
         <scene sceneID="T6B-9c-FP1">
             <objects>
                 <navigationController id="dWV-Kd-8Uj" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="CiP-TZ-eyb"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="icon-other" id="CiP-TZ-eyb"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="UxV-E6-8go">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -121,4 +121,8 @@
             <point key="canvasLocation" x="526" y="727"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon-instagram" width="20" height="20"/>
+        <image name="icon-other" width="20" height="20"/>
+    </resources>
 </document>

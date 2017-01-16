@@ -26,6 +26,8 @@ public class CPDownloader {
     
     public static let sharedInstance = CPDownloader()
     
+    fileprivate var downloadedFilesRoutes = [String: URL]()
+    
     fileprivate let downloadOperations = DownloadOperations()
     
     /// Generic function for getting resource from a given URL
@@ -130,4 +132,29 @@ extension CPDownloader {
         getResource([String: AnyObject].self, url: url, handler: handler)
     }
 
+}
+
+//  MARK: +Files
+
+extension CPDownloader {
+    
+    /// Function for getting any other File as data from URL
+    ///
+    /// - Parameters:
+    ///   - url: String url
+    ///   - handler: Handler closure
+    public func getFile(url: String, handler: @escaping generalHandler) {
+        
+        getResource(URL.self, url: url, handler: handler)
+    }
+    
+    public func set(_ filePath: URL, for url: String) {
+                
+        downloadedFilesRoutes[url] = filePath
+    }
+    
+    public func getFilePath(for url: String) -> URL? {
+
+        return downloadedFilesRoutes[url]
+    }
 }

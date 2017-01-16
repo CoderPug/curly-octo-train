@@ -80,3 +80,34 @@ extension Dictionary : CPDownloadable {
         }
     }
 }
+
+//  MARK: +Data
+
+extension URL : CPDownloadable {
+    
+    static func downloadResourceOperation<URL>(operation: DownloadOperation<URL>, url: String) {
+        
+        DownloadDataManager.downloadFile(url: url) { result in
+            
+            if operation.isCancelled == true {
+                
+                operation.state = .finished
+            } else {
+                
+                switch result {
+                    
+                case .Failure(_):
+                    
+                    operation.state = .finished
+                    break
+                    
+                case let .Success(result):
+                    
+                    operation.object = result as? URL
+                    operation.state = .finished
+                    break
+                }
+            }
+        }
+    }
+}
