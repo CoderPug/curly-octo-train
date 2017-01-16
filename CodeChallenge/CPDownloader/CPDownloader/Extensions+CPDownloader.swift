@@ -72,4 +72,33 @@ extension UILabel {
             })
         }
     }
+    
+    public func getFile(url: String) {
+        
+        CPDownloader.sharedInstance.getFile(url: url) { [weak self] result in
+            
+            DispatchQueue.main.async(execute: { () -> Void in
+                
+                switch result {
+                    
+                case let .Failure(error):
+                    
+                    dump(error)
+                    break
+                    
+                case let .Success(filePath):
+                    
+                    guard let filePath = filePath as? URL else {
+                        self?.text = "error saving downloaded file"
+                        return
+                    }
+                    
+                    CPDownloader.sharedInstance.set(filePath, for: url)
+                    self?.text = CPDownloader.sharedInstance.getFilePath(for: url)?.absoluteString
+                    
+                    break
+                }
+            })
+        }
+    }
 }
