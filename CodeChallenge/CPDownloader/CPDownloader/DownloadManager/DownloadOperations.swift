@@ -20,7 +20,7 @@ enum State: String {
 
 class DownloadOperations {
     
-    var downloadsInProgressHandlers = [String: Array<(Result<UIImage>)->()>]()
+    var downloadsInProgressHandlers = [String: Array<(Result<AnyObject>)->()>]()
     var downloadsInProgress = [String: Operation]()
     var downloadQueue: OperationQueue = {
         
@@ -33,10 +33,10 @@ class DownloadOperations {
 
 //  DownloadImageOperation
 
-class DownloadImageOperation: Operation {
+class DownloadOperation<T: CPDownloadable>: Operation {
     
     var url: String?
-    var image: UIImage?
+    var object: T?
     
     var state = State.ready {
         
@@ -95,28 +95,8 @@ class DownloadImageOperation: Operation {
                 return
             }
             
-            DownloadDataManager.downloadImage(url: url) { [weak self] result in
-                
-                if self?.isCancelled == true {
-                    
-                    self?.state = .finished
-                } else {
-                    
-                    switch result {
-                        
-                    case .Failure(_):
-                        
-                        self?.state = .finished
-                        break
-                        
-                    case let .Success(image):
-                        
-                        self?.image = image
-                        self?.state = .finished
-                        break
-                    }
-                }
-            }
+            T.downloadResourceOperation(operation: self, url: url)            
         }
     }
+    
 }
