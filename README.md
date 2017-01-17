@@ -32,5 +32,8 @@ Xcode 8.2
 None.
 
 ###Demo
+[Link for longer updated demo at imgur](http://i.imgur.com/OMfn9Bx.gif)
 
-![](http://i.imgur.com/OMfn9Bx.gif)
+![](http://i.imgur.com/yfHdNtq.gif)
+
+
