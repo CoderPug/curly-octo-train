@@ -75,7 +75,8 @@ class InstagramImagesTableViewController: UITableViewController {
                 
             case let .Success(dictionary):
                 
-                guard let list = dictionary["data"] as? [AnyObject] else {
+                guard let list = dictionary["data"] as? [AnyObject],
+                    let dictionary = dictionary as? [String: AnyObject] else {
                     
                     return
                 }

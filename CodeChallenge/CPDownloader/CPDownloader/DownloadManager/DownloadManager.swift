@@ -26,6 +26,7 @@ enum SupportedTypes {
     case unknown
     case image
     case json
+    case file
 }
 
 /// Enum of possible DownloadManagerError-s
@@ -37,11 +38,13 @@ enum SupportedTypes {
 /// - couldNotObtainJSON: request succeeded but response data can not be converted to json.
 enum DownloadManagerError: Error {
     case unknown
+    case custom(String?)
     case wrongURL
     case requestFailed(Error?)
     case couldNotReadResponse(Error?)
     case couldNotObtainImage
     case couldNotObtainJSON
+    case couldNotObtainFile
 }
 
 //  MARK: DownloadDataManager
@@ -112,10 +115,10 @@ internal struct DownloadDataManager {
             
             handler(.Success((data, .json)))
             break
-            
+
         default:
             
-            handler(.Success((data, .unknown)))
+            handler(.Success((data, .file)))
             break
         }
     }
@@ -184,6 +187,55 @@ extension DownloadDataManager {
                 }
                 
                 handler(.Success(json))
+                break
+            }
+        }
+    }
+    
+}
+
+//  MARK: DownloadDataManager+File
+
+extension DownloadDataManager {
+    
+    internal typealias downloadDataManagerFileHandler = (Result<URL>) -> Swift.Void
+    
+    internal static func downloadFile(url: String, handler: @escaping downloadDataManagerFileHandler) {
+        
+        download(url: url) { result in
+            
+            switch result {
+                
+            case let .Failure(error):
+                
+                handler(.Failure(error))
+                break
+                
+            case let .Success(data, type):
+                
+                guard type == .file,
+                    let data = data else {
+                        
+                        handler(.Failure(DownloadManagerError.couldNotObtainFile))
+                        return
+                }
+                
+                let fileManager = FileManager.default
+                let directoryURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                let tempURL = URL(string: url)
+                let finalPath = directoryURL.appendingPathComponent(tempURL?.stringForDirectory() ?? "")
+                
+                do {
+                    
+                    try data.write(to: finalPath)
+                    
+                } catch {
+                    
+                    handler(.Failure(DownloadManagerError.custom("Could not save file data.")))
+                    
+                }
+                
+                handler(.Success(finalPath))
                 break
             }
         }

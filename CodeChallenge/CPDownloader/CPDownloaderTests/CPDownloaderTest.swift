@@ -68,7 +68,7 @@ class CPDownloaderTest: XCTestCase {
             case let .Failure(error):
                 //  Then
                 XCTAssertNotNil(error)
-                XCTAssert(error as? CPDownloaderError == CPDownloaderError.couldNotObtainImage)
+                XCTAssert(error as? CPDownloaderError == CPDownloaderError.couldNotObtainObject)
                 break
                 
             default:
@@ -102,7 +102,7 @@ class CPDownloaderTest: XCTestCase {
             case let .Failure(error):
                 //  Then
                 XCTAssertNotNil(error)
-                XCTAssert(error as? CPDownloaderError == CPDownloaderError.couldNotObtainImage)
+                XCTAssert(error as? CPDownloaderError == CPDownloaderError.couldNotObtainObject)
                 break
                 
             default:

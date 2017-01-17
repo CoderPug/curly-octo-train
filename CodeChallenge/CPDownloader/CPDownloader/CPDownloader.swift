@@ -16,38 +16,37 @@ import Foundation
 enum CPDownloaderError: Error {
     case unknown
     case operationCanceled
-    case couldNotObtainImage
+    case couldNotObtainObject
 }
 
 /// CPDownloader handles data download.
 public class CPDownloader {
     
-    public typealias getImageHandler = (Result<UIImage>) -> Swift.Void
-    
-    public typealias getJSONHandler = (Result<[String: AnyObject]>) -> Swift.Void
+    public typealias generalHandler = (Result<AnyObject>) -> Swift.Void
     
     public static let sharedInstance = CPDownloader()
     
+    fileprivate var downloadedFilesRoutes = [String: URL]()
+    
     fileprivate let downloadOperations = DownloadOperations()
     
-    fileprivate let downloadCache = DownloadCache()
-    
-    /// Function for getting Image from URL
+    /// Generic function for getting resource from a given URL
     ///
     /// - Parameters:
+    ///   - object: Generic parameter type
     ///   - url: String url
-    ///   - handler: Handler block
-    public func getImage(url: String, handler: @escaping getImageHandler) {
+    ///   - handler: Handler closure
+    fileprivate func getResource<T: CPDownloadable>(_ object: T.Type,
+                                 url: String,
+                                 handler: @escaping (Result<AnyObject>) -> Swift.Void) {
         
-        let operation = DownloadImageOperation()
+        let operation = DownloadOperation<T>()
         operation.url = url
         
         if let cachedObject = DownloadCache.sharedInstance.getObject(key: url) {
             
-            if let cachedImage = cachedObject as? UIImage {
-                print("showing cached image")
-                handler(.Success(cachedImage))
-            }
+            print("showing cached data")
+            handler(.Success(cachedObject))
             return
         }
         
@@ -70,17 +69,17 @@ public class CPDownloader {
                 _ = self?.downloadOperations.downloadsInProgress.removeValue(forKey: url)
                 
                 guard let arrayHandlers = self?.downloadOperations.downloadsInProgressHandlers[url],
-                    let image = operation.image else {
-                    
-                    handler(.Failure(CPDownloaderError.couldNotObtainImage))
-                    return
+                    let object = operation.object else {
+                        
+                        handler(.Failure(CPDownloaderError.couldNotObtainObject))
+                        return
                 }
                 
-                self?.downloadCache.setObject(object: image, key: url)
+                DownloadCache.sharedInstance.setObject(object: object as AnyObject, key: url)
                 
                 for handler in arrayHandlers {
                     
-                    handler(.Success(image))
+                    handler(.Success(object as AnyObject))
                 }
                 
                 self?.downloadOperations.downloadsInProgressHandlers[url] = nil
@@ -89,38 +88,73 @@ public class CPDownloader {
             downloadOperations.downloadsInProgress[url] = operation
             downloadOperations.downloadQueue.addOperation(operation)
         }
-        
     }
     
     public func cancel(url: String){
         
         downloadOperations.downloadsInProgressHandlers[url] = nil
-
+        
         if let operation = downloadOperations.downloadsInProgress[url] {
             operation.cancel()
             _ = downloadOperations.downloadsInProgress.removeValue(forKey: url)
         }
-        
     }
     
-    //  MARK: +JSON
-    
-    public func getJSON(url: String, handler: @escaping getJSONHandler) {
-
-        DownloadDataManager.downloadJSON(url: url) { result in
-            
-            switch result {
-                
-            case .Failure(_):
-                
-                break
-                
-            case let .Success(json):
-                
-                handler(.Success(json))
-                break
-            }
-        }
-    }
 }
 
+//  MARK: +UIImage
+
+extension CPDownloader {
+    
+    /// Function for getting Image from URL
+    ///
+    /// - Parameters:
+    ///   - url: String url
+    ///   - handler: Handler closure
+    public func getImage(url: String, handler: @escaping generalHandler) {
+        
+        getResource(UIImage.self, url: url, handler: handler)
+    }
+
+}
+
+//  MARK: +JSON
+
+extension CPDownloader {
+    
+    /// Function for getting JSON data from URL
+    ///
+    /// - Parameters:
+    ///   - url: String url
+    ///   - handler: Handler closure
+    public func getJSON(url: String, handler: @escaping generalHandler) {
+        
+        getResource([String: AnyObject].self, url: url, handler: handler)
+    }
+
+}
+
+//  MARK: +Files
+
+extension CPDownloader {
+    
+    /// Function for getting any other File as data from URL
+    ///
+    /// - Parameters:
+    ///   - url: String url
+    ///   - handler: Handler closure
+    public func getFile(url: String, handler: @escaping generalHandler) {
+        
+        getResource(URL.self, url: url, handler: handler)
+    }
+    
+    public func set(_ filePath: URL, for url: String) {
+                
+        downloadedFilesRoutes[url] = filePath
+    }
+    
+    public func getFilePath(for url: String) -> URL? {
+
+        return downloadedFilesRoutes[url]
+    }
+}

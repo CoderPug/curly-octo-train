@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import CPDownloader
 
 struct InstagramDetailTableViewCellConstants {
     
     static let nibName = "InstagramDetailTableViewCell"
     static let cellIdentifier = "InstagramDetailTableViewCell"
-    static let estimatedHeight: CGFloat = 70
+    static let estimatedHeight: CGFloat = 150
 }
 
 class InstagramDetailTableViewCell: UITableViewCell {
@@ -24,14 +25,7 @@ class InstagramDetailTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        custommize()
-    }
-    
-    override func prepareForReuse() {
-        
-        labelAuthor.text = ""
-        labelDate.text = ""
-        labelDescription.text = ""
+        custommize() 
     }
     
     func custommize() {
@@ -53,6 +47,11 @@ class InstagramDetailTableViewCell: UITableViewCell {
         labelDescription.text = ""
     }
     
+    override func prepareForReuse() {
+        
+        labelDescription.text = ""
+    }
+    
     func load(data: [String: AnyObject]) {
         
         guard let author = (data as NSDictionary).value(forKeyPath: "caption.from.full_name") as? String,
@@ -67,11 +66,17 @@ class InstagramDetailTableViewCell: UITableViewCell {
         labelDescription.text = description
     }
     
-    func load(title: String, detail: String) {
+    func loadJSON(title: String, detail: String) {
         
         labelAuthor.text = title
         labelDate.text = ""
-        labelDescription.text = detail
+        labelDescription.getJSON(url: detail)
     }
-
+    
+    func loadFile(title: String, detail: String) {
+        
+        labelAuthor.text = title
+        labelDate.text = ""
+        labelDescription.getFile(url: detail)
+    }
 }
